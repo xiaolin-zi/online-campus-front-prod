@@ -119,7 +119,7 @@
 <script>
 import {reactive, ref} from 'vue';
 import cookie from "js-cookie";
-import loginApi from "@/api/user/login";
+import loginApi from "../../apis/user/login.js";
 import {ElMessage} from 'element-plus'
 import router from "@/router";
 
