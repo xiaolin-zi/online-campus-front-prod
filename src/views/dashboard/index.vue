@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="test-index-box">
     <div class="title">
       <p>这是首页(测试版)</p>
@@ -21,4 +21,27 @@
     color: #6f6f6f;
   }
 }
-</style>
+</style> -->
+<template>
+  <Header/>
+  <Banner/>
+  <Main/>
+  <Navbar/>
+  </template>
+  
+  <script setup lang="ts">
+  import Header from "@/components/HomeComponents/Header.vue";
+  import Main from '@/components/HomeComponents/Main.vue'
+  import Banner from '@/components/HomeComponents/Banner.vue'
+  import Navbar from '@/components/HomeComponents/Navbar.vue'
+  
+  </script>
+  
+  <style>
+  body{
+    background-color: #f6f6f6;
+  }
+  
+  
+  </style>
+  

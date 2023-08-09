@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'login'
+      redirect: 'campus/dashboard/deal'
     },
     {
       path: '/campus',
@@ -16,6 +16,18 @@ const router = createRouter({
           path: '/campus/dashboard',
           name: '线上校园-首页',
           component: () => import('@/views/dashboard/index.vue'),
+            children:[
+              {
+                path:'deal',
+                name:'线上校园-首页-交易',
+                component:() => import('@/views/dashboard/Deal.vue')
+              },
+              {
+                path:'adjunct',
+                name:'线上校园-首页-兼职',
+                component:() => import('@/views/dashboard/Adjunct.vue')
+              }
+            ]
         },
         {
           path: '/campus/contact',
