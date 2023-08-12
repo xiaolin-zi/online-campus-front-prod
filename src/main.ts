@@ -8,6 +8,7 @@ import { createPinia } from 'pinia';
 import App from '@/App.vue';
 import router from '@/router';
 
+import 'amfe-flexible'//兼容设置
 
 const app = createApp(App);
 
