@@ -13,7 +13,7 @@ const router = createRouter({
       component: () => import('@/layout/index.vue'),
       children: [
         {
-          path: '/campus/dashboard',
+          path: '/campus/dashboard/',
           name: '线上校园-首页',
           component: () => import('@/views/dashboard/index.vue'),
             children:[

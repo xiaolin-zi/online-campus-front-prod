@@ -1,103 +1,84 @@
 <template>
   <!-- 页面头部组件， -->
   <div class="headerContain">
-    <van-row>
-    <!-- logo -->
-      <van-col>
-        <van-image
-          style="display: flex;"
-          height="30"
-          fit="contain"
-          :src="getImageUrl('要发财.png')"
-        />
-      </van-col>
-      <van-col span="18">
+   
         <!-- 搜索栏 -->
-        <form action="/">
           <van-search
+            v-model="value"
             shape="round"
-            placeholder="请输入搜索关键词"
-            input-align="center"
-          />
-        </form>
-      </van-col>
-      <!-- 发布 -->
-      <van-col>
-        <van-button 
-        style="display: flex;"
-        is-link 
-        @click="show=true" 
-        icon="plus" round 
-        type="primary" 
-        color="#ffe304" 
-        size="small"/>
-        <van-action-sheet v-model:show="show" :actions="actions"  />
-      </van-col>
-    </van-row>
-    <!-- tab标签页 -->
-    <van-tabs 
-     v-model:active="activeName" 
-     color="#ffe304" 
-     line-width="30px"
-     @click-tab="onClickTab"
-     >
-          
-          <van-tab title="交易" name="deal" ></van-tab>
+            placeholder="Search menu,restaurant or etc"
+            show-action
+            autofocus
+            @search="onSearch"
+          >
+          <template #action>
+            <div @click="onClickButton">|&nbsp&nbsp搜索</div>
+          </template>
 
-          <van-tab title="兼职" name="adjunct"></van-tab>
-         
-      
-     </van-tabs>
+          </van-search>
   </div>
   
   </template>
   
   <script setup lang="ts">
-  import {ref} from 'vue'
-  import { useRouter,useRoute } from 'vue-router'
-  import { RouterLink } from 'vue-router';
-  //引入本地图片函数
-   const getImageUrl = (name:string) => {
-        return new URL(`../../assets/${name}`, import.meta.url).href
-    }
-  //控制发布按钮
-  interface ActionItem {
-  name: string;
-}
+//   import {ref} from 'vue'
+//   import { useRouter,useRoute } from 'vue-router'
+//   import { RouterLink } from 'vue-router';
+//   //引入本地图片函数
+//    const getImageUrl = (name:string) => {
+//         return new URL(`../../assets/${name}`, import.meta.url).href
+//     }
+//   //控制发布按钮
+//   interface ActionItem {
+//   name: string;
+// }
 
-    const show = ref(false)
-    const actions: ActionItem[] = [
-          { name: '发布交易' },
-          { name: '发布兼职' },
-          { name: '发布招募' },
-        ];
+//     const show = ref(false)
+//     const actions: ActionItem[] = [
+//           { name: '发布交易' },
+//           { name: '发布兼职' },
+//           { name: '发布招募' },
+//         ];
    
-    // tab标签页
-    const activeName = ref('deal')
-    //标签跳转路由逻辑
+//     // tab标签页
+//     const activeName = ref('deal')
+//     //标签跳转路由逻辑
 
-    const router = useRouter()
-    const onClickTab = ({ name }) =>router.push(name)
-    
-      
+//     const router = useRouter()
+//     const onClickTab = ({ name }) =>router.push(name)  
     // }
 
+    import { ref } from 'vue';
+    import { showToast } from 'vant';
 
+    const value = ref('');
+    const onSearch = (val:string) => showToast(val);
+    const onClickButton = () => showToast(value.value);
   </script>
   
   <style lang="less">
   .headerContain{
+    display: flex;
+    justify-content: center;
     //吸顶定位
     position:sticky;
     top: 0;
     z-index: 999;
     background-color: #fff;
-    border-bottom: 1px solid #f2f2f2;
-    .van-row{
-      display: flex;
-      justify-content: center;
-      align-items: center; 
-     }
+    .van-search{
+      width: 90%;
+      border: 2px solid #e5e5e5;
+      border-radius:40px;
+      --van-search-content-background:white;
+      --van-search-padding:0 10px;
+      margin: 20px 0 10px 0;
+      .van-search__action{
+        padding-right: 20px;
+        
+      }
+      
+    }
+
   }
 
     

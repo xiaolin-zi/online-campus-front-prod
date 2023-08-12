@@ -23,16 +23,17 @@ const getImageUrl = (name:string) => {
 <style lang="less" scoped>
 .BannerContainer{
     display: flex;
-    margin:8px;
-    .van-swipe .van-swipe-item {
+    margin:10px 18px;
+    height: 160px;
+    justify-content: center;
+    .van-swipe{
         display: flex;
-        width: 100%;
-        height: 100px;
         color: #fff;
         font-size: 20px;
         justify-content: center;
         align-items: center;
         background-color: white;
+        border-radius: 20px;
 
         img{
             object-fit:contain;

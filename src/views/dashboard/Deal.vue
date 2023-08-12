@@ -1,21 +1,14 @@
 <template>
-    <div>
-    <van-grid :column-num="2" gutter="15" clickable>
-      <van-grid-item v-for="(item,index) in items" :key='index' :to='`${ item.url }`'>
-        <van-image :src="item.image" />
-        <span class="goodsName">{{ item.name }}</span>
-        <span>
-          <van-tag v-for="(labelItem,labelIndex) in item.label" :key='labelIndex' plain>{{ labelItem }}</van-tag>
-        </span>
-        <span class="goodsPrice">￥{{ item.price }}</span>
-        
-      </van-grid-item>
-    </van-grid>
+  <div class="deal-card">
+    <div class="card-img"></div>
+      <img src="../../assets/晚霞.jpg" alt="">
+    <div class="card-message"></div>
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+
 // 假定的静态数据：其中url为商品卡片点击后跳转的详情页面路由地址
 const items = [
   {
@@ -64,26 +57,26 @@ const items = [
 </script>
 
 <style scoped lang="less">
-.van-grid-item__content {
-display: grid;
+.deal-card{
+  display: grid;;
+  grid-template-rows: 4fr 3fr;
+  height: 160px;
+  width: 45%;
+  margin: 0 18px 12px 18px;
+  border: 1px solid rgb(213, 213,213,0.3) ;
+  border-radius:8px;
+  .card-img{
+    background-color:pink;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+      img{
+      object-fit:contain;
 
-
-
-  .goodsName{
-  display: flex;
-  font-size: 16px;
- 
-  color:black;
-  margin-bottom: 5px;
+    }
+  
 }
- .goodsPrice{
-  font-size: 18px;
- 
-  color:#ed5d47;
-}
-  .van-tag{
-    margin-right: 5px;
-  }
-}
 
+}
 </style>
