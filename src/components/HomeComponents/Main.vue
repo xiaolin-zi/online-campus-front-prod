@@ -19,7 +19,7 @@
 <style scoped lang="less">
 .main{
   width: 100%;
-  height: 410px;
+  height: 350px;
   overflow: auto;
   /* 悬浮气泡容器 */
 .bubble-container {

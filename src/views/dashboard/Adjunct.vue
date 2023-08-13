@@ -51,7 +51,7 @@ body{
         margin: 8px;
     
         .title{
-            font-size: 18px;
+            font-size: 16px;
             font-weight:700;
             
             
