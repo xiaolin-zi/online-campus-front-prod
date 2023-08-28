@@ -6,7 +6,7 @@
       <router-view/>
     </div>
     <van-tabbar v-model="active" class="tabber" active-color="#73ca76" route>
-      <van-tabbar-item class="tab" to="/campus/dashboard/deal">
+      <van-tabbar-item class="tab" to="/campus/dashboard">
         <template #icon>
           <van-icon name="wap-home-o" size="18"/>
         </template>

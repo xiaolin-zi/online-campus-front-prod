@@ -28,7 +28,7 @@
   <Banner/>
   <!-- tab标签页按钮 -->
   <div class="home-tab">
-      <RouterLink to="/campus/dashboard/deal">
+      <RouterLink to="/campus/dashboard">
         <span>交易</span>
       </RouterLink>
       
@@ -52,7 +52,7 @@
 body{
     
   .home-tab{
-    height: 40px;
+    height: 50px;
     width: 100%;
     font-size: 18px;
     display: flex;

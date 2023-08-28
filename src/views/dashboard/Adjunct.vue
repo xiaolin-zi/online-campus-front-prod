@@ -1,9 +1,9 @@
 <template>
     <!-- 这里先渲染10个，后期把10换成存放数据的store对象、数组名即可 -->
-  <div class="adjunct-card" v-for="item in 10" :key="item">
+  <div class="adjunct-card" v-for="item in adCard" :key="item">
     <!-- 卡片左边（占据3/5） -->
     <div class="card-left">
-        <div  class="title">Java后端开发</div>
+        <div  class="title">{{ item.jobTitle }}</div>
         <div  class="request">应届生·三个月·不加班</div>
         <div  class="tag-container">
             <span>实习生</span><span>可大一大二</span>
@@ -11,7 +11,7 @@
     </div>
     <!-- 卡片右边（占据2/5）按照要求公司名字长度<=6 -->
     <div class="card-right">
-        <div class="price">￥6k-10k/月</div>
+        <div class="price">￥{{ item.salary }}/次</div>
         <div class="time">2023-08-09</div>
         <div class="company">
             <!-- 公司图标 -->
@@ -27,7 +27,20 @@
 </template>
 
 <script setup lang="ts">
+import { ref , reactive, onMounted } from 'vue'
+import { getLazyloading} from '../../apis/dashboard/lazyloading.js'
 
+
+const lazy:object = ref({})
+let adCard = ref([])//存放数据
+const lazyloading = async()=> {
+    lazy.value = await getLazyloading(0)
+    adCard.value = lazy.value.data.data
+
+    console.log(adCard.value);
+    
+}
+onMounted(lazyloading)
 </script>
 
 <style scoped lang="less">
@@ -52,9 +65,7 @@ body{
     
         .title{
             font-size: 16px;
-            font-weight:700;
-            
-            
+            font-weight:700;   
         }
         .request{
             font-size:12px;

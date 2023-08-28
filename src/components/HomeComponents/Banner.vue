@@ -1,6 +1,6 @@
 <template>
     <div class="BannerContainer">
-        <van-swipe :autoplay="2000" lazy-render>
+        <van-swipe :autoplay="3000" indicator-color="#76ca73" loop>
             <van-swipe-item v-for="image in images" :key="image">
                 <img :src="image" />
             </van-swipe-item>
@@ -23,8 +23,8 @@ const getImageUrl = (name:string) => {
 <style lang="less" scoped>
 .BannerContainer{
     display: flex;
-    margin:10px 18px;
-    height: 160px;
+    margin:10px 20px;
+    height: 140px;
     justify-content: center;
     .van-swipe{
         display: flex;
@@ -33,14 +33,13 @@ const getImageUrl = (name:string) => {
         justify-content: center;
         align-items: center;
         background-color: white;
-        border-radius: 20px;
+        border-radius: 10px;
 
         img{
             object-fit:contain;
             width: 100%;
-    }
-  }
-  
-  
+        }
+
+  } 
 }
 </style>

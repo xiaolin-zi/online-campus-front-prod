@@ -1,4 +1,5 @@
 import axios from "axios";
+import { request } from "http";
 
 export const contactRequest = axios.create({
   baseURL: '/contact-api',
@@ -18,5 +19,13 @@ export const ossRequest = axios.create({
     'Content-Type': 'multipart/form-data'
   }
 });
+
+export const parttimeRequest = axios.create({
+  baseURL:'/parttime-api',
+  timeout:90000,
+  headers:{
+    token:'t1',
+  }
+})
 
 export default axios
