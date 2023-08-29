@@ -101,6 +101,11 @@ const router = createRouter({
       path:'/campus/user/balance',
       name:'线上校园-用户-余额与明细',
       component:() => import('@/views/user/Balance.vue')
+    },
+    {
+      path:'/campus/user/account',
+      name:'线上校园-用户-账号与安全',
+      component:() => import('@/views/user/Account.vue')
     }
    
   ],
