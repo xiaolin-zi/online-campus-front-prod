@@ -3,7 +3,7 @@ import { userRequest } from '@/utils/request';
 //根据账号获取用户信息
 export const getUserInfoByAccountApi = (account: string) => {
   return userRequest({
-    url: `/campusUser/user/getUserByAccount/${account}`,
+    url: `/user/getUserByAccount/${account}`,
     method: 'get'
   });
 }
@@ -11,7 +11,7 @@ export const getUserInfoByAccountApi = (account: string) => {
 //验证码是否正确
 export const checkPhoneCodeApi = (verifyPhone: any) => {
   return userRequest({
-    url: '/campusUser/user/checkPhoneCode/',
+    url: '/user/checkPhoneCode/',
     method: 'post',
     data: verifyPhone
   });
@@ -19,7 +19,7 @@ export const checkPhoneCodeApi = (verifyPhone: any) => {
 
 export const checkEmailCodeApi = (verifyEmail: any) => {
   return userRequest({
-    url: '/campusUser/user/checkEmailCode/',
+    url: '/user/checkEmailCode/',
     method: 'post',
     data: verifyEmail
   })

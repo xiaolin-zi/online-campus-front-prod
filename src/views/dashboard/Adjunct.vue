@@ -1,6 +1,6 @@
 <template>
     <!-- 这里先渲染10个，后期把10换成存放数据的store对象、数组名即可 -->
-  <div class="adjunct-card" v-for="item in adCard" :key="item">
+  <div class="adjunct-card" v-for="item in adCard" :key="item.jobId">
     <!-- 卡片左边（占据3/5） -->
     <div class="card-left">
         <div  class="title">{{ item.jobTitle }}</div>
@@ -27,17 +27,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref , reactive, onMounted } from 'vue'
-import { getLazyloading} from '@/apis/dashboard/lazyloading.js'
+import { Job } from '@/interfaces/parttime';
+import { ref , reactive, onMounted } from 'vue';
+import { lazyLoadingApi } from '@/apis/parttime/index';
+import { showToast } from 'vant';
 
 
-const lazy:object = ref({})
-let adCard = ref([])//存放数据
-const lazyloading = async()=> {
-    lazy.value = await getLazyloading(0)
-    adCard.value = lazy.value.data.data
+const lazy = ref<Job>();
+let adCard = ref<Job[]>([])//存放数据
+const lazyloading = async() => {
+    const { data: res } = await lazyLoadingApi(0);
+    console.log(res);
+    if (res.code === 0) {
+      // lazy.value = res.data;
+      adCard.value = res.data;
+    } else {
+      showToast('内部出错, 请稍后重试...');
+    }
+    // adCard.value = lazy.value.data.data
 
-    console.log(adCard.value);
+    // console.log(adCard.value);
     
 }
 onMounted(lazyloading)

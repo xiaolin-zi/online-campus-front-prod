@@ -48,9 +48,6 @@
     <van-button hairline size="large" to="user/account">账号与安全</van-button>
     <van-button hairline size="large">退出登录</van-button>
   </div>
-
- 
-
 </div>
 
 

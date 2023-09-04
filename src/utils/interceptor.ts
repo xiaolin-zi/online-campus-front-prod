@@ -1,7 +1,7 @@
 import { storeToRefs } from 'pinia';
 import { useGlobalStore } from '@/stores/useGlobalStore';
 import { AxiosError, AxiosResponse } from 'axios';
-import router from '@/routers';
+import router from '@/router';
 import { showToast } from 'vant';
 
 export const reqSuccessCallback = (config: any) => {
@@ -11,6 +11,7 @@ export const reqSuccessCallback = (config: any) => {
 
   if (token != null || token !== undefined || token !== '') {
     config.headers.token = token;
+    config.headers.uid = uid;
   } else {
     showToast('token无效或已过期, 请重新登录!');
     globalStore.$reset();

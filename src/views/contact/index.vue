@@ -7,11 +7,11 @@
       <template #right>
         <van-icon name="search" size="25" color="#0a1629" @click="toSearch"/>
         &nbsp;&nbsp;&nbsp;
-        <van-icon name="bell" size="25" color="#0a1629" :dot="true"/>
+        <van-icon name="bell" size="25" color="#0a1629" :dot="true" @click="toSys"/>
         <van-image round class="avatar"
           fit="cover"
           :src="avatar2"
-        />
+          @click="toMyDetail"/>
       </template>
     </van-nav-bar>
     <div class="main-box">
@@ -191,6 +191,14 @@ const toSearch = () => {
 // 跳转到写动态
 const toAdd = () => {
   router.push('/campus/contact/add');
+}
+
+const toSys = () => {
+  router.push('/campus/message/sys');
+}
+
+const toMyDetail = () => {
+  router.push('/campus/user/detail');
 }
 
 </script>

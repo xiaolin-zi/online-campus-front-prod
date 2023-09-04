@@ -32,7 +32,7 @@
 
 <script>
 import {reactive, ref} from 'vue';
-import router from '@/routers';
+import router from '@/router';
 import CryptoJS from 'crypto-js';
 import { useRoute } from 'vue-router'
 import { ElMessage } from "element-plus";

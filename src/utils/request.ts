@@ -29,6 +29,11 @@ const ossRequest = axios.create({
   }
 });
 
+const parttimeRequest = axios.create({
+  baseURL: '/parttime-api',
+  timeout: 90000,
+});
+
 gatewayRequest.interceptors.request.use(reqSuccessCallback, errCallback);
 gatewayRequest.interceptors.response.use(respSuccessCallback, errCallback);
 
@@ -44,10 +49,14 @@ contactRequest.interceptors.response.use(respSuccessCallback, errCallback);
 ossRequest.interceptors.request.use(reqSuccessCallback, errCallback);
 ossRequest.interceptors.response.use(respSuccessCallback, errCallback);
 
+parttimeRequest.interceptors.request.use(reqSuccessCallback, errCallback);
+parttimeRequest.interceptors.response.use(respSuccessCallback, errCallback);
+
 export {
   gatewayRequest,
   userRequest,
   messageRequest,
   contactRequest,
-  ossRequest
+  ossRequest,
+  parttimeRequest,
 }

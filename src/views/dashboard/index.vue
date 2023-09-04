@@ -1,28 +1,3 @@
-<!-- <template>
-  <div class="test-index-box">
-    <div class="title">
-      <p>这是首页(测试版)</p>
-    </div>
-  </div>
-</template>
-
-<script lang="ts" setup>
-import {} from 'vue';
-</script>
-
-<style lang="less" scoped>
-.test-index-box {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  .title {
-    text-align: center;
-    font-size: 40px;
-    color: #6f6f6f;
-  }
-}
-</style> -->
-<!-- 首页 -->
 <template>
   <Header/>
   <Banner/>
@@ -36,21 +11,18 @@ import {} from 'vue';
         <span>兼职</span>
       </RouterLink>
     </div>
-
   <Main/>
-
-  </template>
+</template>
   
-  <script setup lang="ts">
-  import Header from "@/components/HomeComponents/Header.vue";
-  import Main from '@/components/HomeComponents/Main.vue'
-  import Banner from '@/components/HomeComponents/Banner.vue'
-  import { RouterLink } from "vue-router";
-  </script>
+<script setup lang="ts">
+import Header from "@/components/HomeComponents/Header.vue";
+import Main from '@/components/HomeComponents/Main.vue'
+import Banner from '@/components/HomeComponents/Banner.vue'
+import { RouterLink } from "vue-router";
+</script>
   
-  <style lang="less">
+<style lang="less" scoped>
 body{
-    
   .home-tab{
     height: 50px;
     width: 100%;
@@ -65,6 +37,6 @@ body{
       } 
     }
   }
-  
+
   </style>
   

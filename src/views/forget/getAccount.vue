@@ -20,8 +20,8 @@
 
 <script>
 import { reactive, ref } from 'vue';
-import router from '@/routers';
-import forgetApi from '@/apis/user/forget.js';
+import router from '@/router';
+import forgetApi from '@/apis/user/forget';
 import { ElMessage } from "element-plus";
 import CryptoJS from 'crypto-js';
 

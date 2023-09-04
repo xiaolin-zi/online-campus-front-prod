@@ -1,13 +1,23 @@
 <template>
   <div class="messages">
-    <header class="message-title">
+
+    <van-nav-bar class="header-box">
+      <template #left>
+        <van-icon name="arrow-left" size="18" color="#0a1629" @click="() => { router.push('/campus/message'); }"/>
+      </template>
+      <template #title>
+        <p class="title">{{ user.username }}</p>
+      </template>
+    </van-nav-bar>
+
+    <!-- <header class="message-title">
       <div class="head-left">
       <el-icon @click="goBack" class="arrow-icon"><ArrowLeft /></el-icon> 
     </div>
     <div class="head-center">   
       <p>{{ user.username }}</p>
     </div>
-    </header>
+    </header> -->
     <div class="message-box-wrapper" ref="messageBox">
       <div class="message-box">
         <div v-for="(item, index) in chatList" :key="index">
@@ -214,23 +224,23 @@ const errCallback = (data: any) => {
   box-sizing: border-box;
   overflow: hidden;
   height: 100%;
-  .message-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-  }
-
-  .arrow-icon {
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  .head-center {
-    text-align: center;
-    flex-grow: 1;
+  .header-box {
+    width: 100%;
+    z-index: 100;
+    overflow: hidden;
+    top: 0;
+    position: fixed;
+    height: 50px;
+    background: #f6f6f6;
+    .title {
+      color: #0a1629;
+      line-height: 50px;
+      text-align: center;
+      font-size: 22px;
+    }
   }
   .message-box-wrapper {
+    margin-top: 50px;
     height: 60vh;
     overflow-y: scroll;
     -ms-flex-negative: 0;
@@ -359,6 +369,7 @@ const errCallback = (data: any) => {
 
       p {
         color: #b1b1b1;
+        font-size: 15px;
         margin-right: 10px;
       }
     }

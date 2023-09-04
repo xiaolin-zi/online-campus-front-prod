@@ -130,6 +130,7 @@ onUpdated(likeIconToggle);
         line-height: 40px;
       }
       .content-box {
+        font-size: 18px;
         width: 300px;
       }
     }
@@ -162,6 +163,7 @@ onUpdated(likeIconToggle);
         list-style: none;
         li {
           width: 90px;
+          font-size: 18px;
           color: #0a1629;
           margin-right: 5px;
           line-height: 36px;

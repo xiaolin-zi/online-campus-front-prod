@@ -3,8 +3,8 @@ import { gatewayRequest } from '@/utils/request';
 //密码登录
 export const loginApi = (userInfo: any) => {
   return gatewayRequest({
-    url: '/campusUser/login',
     method: 'post',
+    url: '/campusUser/login',
     data: userInfo
   })
 }
@@ -12,8 +12,8 @@ export const loginApi = (userInfo: any) => {
 //手机号登录
 export const loginByPhoneApi = (loginInfo: any) => {
   return gatewayRequest({
-    url: '/campusUser/loginByCode',
     method: 'post',
+    url: '/campusUser/loginByCode',
     data: loginInfo
   })
 }
@@ -21,7 +21,15 @@ export const loginByPhoneApi = (loginInfo: any) => {
 //发送短信验证码
 export const sendPhoneCodeApi = (phone: any) => {
   return gatewayRequest({
-    url: `/campusUser/send/${phone}`,
     method: 'get',
+    url: `/campusUser/send/${phone}`
+  });
+}
+
+// 退出登录
+export const logoutApi = () => {
+  return gatewayRequest({
+    method: 'get',
+    url: '/campusUser/logout'
   });
 }

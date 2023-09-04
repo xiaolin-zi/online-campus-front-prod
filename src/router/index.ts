@@ -36,7 +36,6 @@ const router = createRouter({
               
             ]
         },
-        
         {
           path: '/campus/contact',
           name: '线上校园-交际',
@@ -91,7 +90,7 @@ const router = createRouter({
     },
     { 
       path: '/getAccount',
-      name: '线上校园-忘记密码',
+      name: '线上校园-忘记1',
       component: () => import('@/views/forget/getAccount.vue'),
     },
     { 
@@ -106,7 +105,7 @@ const router = createRouter({
     },
     { 
       path: '/forget', 
-      name:"forget", 
+      name:'线上校园-忘记2', 
       component: () => import('@/views/forget/forget.vue') 
     },
     {
@@ -117,17 +116,17 @@ const router = createRouter({
     {
       path:'/campus/user/detail',
       name:'线上校园-用户-个人资料',
-      component:() => import('@/views/user/Detail.vue'),
+      component:() => import('@/views/user/detail/index.vue'),
     },
     {
       path:'/campus/user/balance',
       name:'线上校园-用户-余额与明细',
-      component:() => import('@/views/user/Balance.vue')
+      component:() => import('@/views/user/balance/index.vue')
     },
     {
       path:'/campus/user/account',
       name:'线上校园-用户-账号与安全',
-      component:() => import('@/views/user/Account.vue')
+      component:() => import('@/views/user/account/index.vue')
     }
    
   ],
@@ -140,6 +139,7 @@ router.beforeEach((to, from, next) => {
   // console.log('router beforeEach', from.path, to.path);
 
   if (to.path === '/login' || to.path === '/register') {
+    closeWebSocket();
     next();
   } else {
     if (token != null || token !== '' || token !== undefined) {

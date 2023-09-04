@@ -36,8 +36,6 @@
                 <van-cell title="生日" value="未设置"  is-link/>
                 <van-cell title="学校" value="填写学校，发现校友" is-link/>
                 <van-cell title="年级" value="填写年级" is-link/>
-
-                
             </van-cell-group>
         </div>
 
@@ -51,7 +49,7 @@ import { showToast } from 'vant';
 const onClickLeft = () => history.back();
 const onClickRight = () => showToast('保存');
 
-const afterRead = (file:File) => {
+const afterRead = (file: any) => {
       // 此时可以自行将文件上传至服务器
       console.log(file.file.name);
       
