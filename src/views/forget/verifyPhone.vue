@@ -451,3 +451,4 @@ export default {
   color: rgb(141, 141, 141);
 }
 </style>
+@/router

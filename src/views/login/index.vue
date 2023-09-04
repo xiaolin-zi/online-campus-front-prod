@@ -111,7 +111,7 @@
 <script lang="ts">
 import { reactive, ref } from 'vue';
 import { loginApi, loginByPhoneApi, sendPhoneCodeApi } from "@/apis/user/login";
-import { ElMessage } from 'element-plus'
+import { ElMessage, FormInstance, FormRules } from 'element-plus'
 import router from "@/routers";
 import { initMessageApi } from '@/apis/message/index';
 import { useGlobalStore } from '@/stores/useGlobalStore';
@@ -121,8 +121,8 @@ const globalStore = useGlobalStore();
 export default {
 
   setup() {
-    const loginForm = ref(null);
-    const loginByPhoneForm = ref(null);
+    const loginForm = ref<FormInstance>();
+    const loginByPhoneForm = ref<FormInstance>();
     const loginLoading = ref(false);
     const login = reactive({
       loginName: "",

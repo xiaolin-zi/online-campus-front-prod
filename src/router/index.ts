@@ -10,7 +10,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'login'
+      redirect: 'campus/dashboard'
     },
     {
       path: '/campus',
@@ -22,7 +22,21 @@ const router = createRouter({
           path: '/campus/dashboard',
           name: '线上校园-总首页',
           component: () => import('@/views/dashboard/index.vue'),
+            children:[
+              {
+                path:'',
+                name:'线上校园-首页-交易',
+                component:() => import('@/views/dashboard/Deal.vue')
+              },
+              {
+                path:'adjunct',
+                name:'线上校园-首页-兼职',
+                component:() => import('@/views/dashboard/Adjunct.vue')
+              },
+              
+            ]
         },
+        
         {
           path: '/campus/contact',
           name: '线上校园-交际',
@@ -95,6 +109,27 @@ const router = createRouter({
       name:"forget", 
       component: () => import('@/views/forget/forget.vue') 
     },
+    {
+      path:'/campus/dashboard/post',
+      name:'线上校园-首页-发布',
+      component:() => import('@/views/dashboard/Post.vue')
+    },
+    {
+      path:'/campus/user/detail',
+      name:'线上校园-用户-个人资料',
+      component:() => import('@/views/user/Detail.vue'),
+    },
+    {
+      path:'/campus/user/balance',
+      name:'线上校园-用户-余额与明细',
+      component:() => import('@/views/user/Balance.vue')
+    },
+    {
+      path:'/campus/user/account',
+      name:'线上校园-用户-账号与安全',
+      component:() => import('@/views/user/Account.vue')
+    }
+   
   ],
 });
 

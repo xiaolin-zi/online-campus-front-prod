@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import { reqSuccessCallback, respSuccessCallback, errCallback } from '@/utils/interceptor';
 
 const gatewayRequest = axios.create({
