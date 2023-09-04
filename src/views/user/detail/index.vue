@@ -30,30 +30,40 @@
 
         <div class="box-bottom">
             <van-cell-group inset border>
-                <van-cell title="姓名" value="遮詹" is-link/>
+                <van-cell title="姓名" :value="userCard.consignee" is-link to="detail/myname"/>
                 <van-cell title="简介" value="未设置" is-link />
                 <van-cell title="性别" value="男"  is-link/>
                 <van-cell title="生日" value="未设置"  is-link/>
-                <van-cell title="学校" value="填写学校，发现校友" is-link/>
+                <van-cell title="学校宿舍" :value="userCard.address" is-link/>
                 <van-cell title="年级" value="填写年级" is-link/>
             </van-cell-group>
         </div>
-
-    </div>
+      </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { showToast } from 'vant';
+import { reactive ,ref, onMounted } from 'vue';
+import { getDetailApi } from '@/apis/user/index.js'
 
 const onClickLeft = () => history.back();
 const onClickRight = () => showToast('保存');
 
 const afterRead = (file: any) => {
-      // 此时可以自行将文件上传至服务器
-      console.log(file.file.name);
-      
-    };
+  // 此时可以自行将文件上传至服务器
+  console.log(file.file.name); 
+};
+
+const userdata = reactive<any>({})
+const userCard = ref<any>([])
+const getUser = async() => {
+  const { data: res } = await getDetailApi();
+  userdata.value = res;
+  userCard.value = res.data.data 
+   console.log(userCard.value)
+}
+onMounted(getUser)
 </script>
 
 <style scoped lang="less">

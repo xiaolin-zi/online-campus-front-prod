@@ -21,7 +21,6 @@ const onClickLeft = () => history.back();
 
 <style scoped lang="less">
 .van-nav-bar{
-    --van-nav-bar-text-color:black;
-    --van-nav-bar-arrow-color:black;
+  --van-nav-bar-background:#f6f6f6;
 }
 </style>

@@ -11,14 +11,14 @@
     </div>
     <!-- 卡片右边（占据2/5）按照要求公司名字长度<=6 -->
     <div class="card-right">
-        <div class="price">￥{{ item.salary }}/次</div>
+        <div class="price">￥{{ item.salary }}</div>
         <div class="time">2023-08-09</div>
         <div class="company">
             <!-- 公司图标 -->
-           <div class="company-logo">
-            <img src="../../assets/要发财.png" alt="">
-           </div>
-           松树技术
+          <div class="company-logo">
+            <img :src="item.userImage" alt="">
+          </div>
+          {{ item.username }}
         </div>
     </div>
   </div>
@@ -29,14 +29,14 @@
 <script setup lang="ts">
 import { Job } from '@/interfaces/parttime';
 import { ref , reactive, onMounted } from 'vue';
-import { lazyLoadingApi } from '@/apis/parttime/index';
+import { getAdjunctApi } from '@/apis/parttime/index';
 import { showToast } from 'vant';
 
 
 const lazy = ref<Job>();
 let adCard = ref<Job[]>([])//存放数据
 const lazyloading = async() => {
-    const { data: res } = await lazyLoadingApi(0);
+    const { data: res } = await getAdjunctApi(0);
     console.log(res);
     if (res.code === 0) {
       // lazy.value = res.data;
@@ -49,7 +49,7 @@ const lazyloading = async() => {
     // console.log(adCard.value);
     
 }
-onMounted(lazyloading)
+onMounted(lazyloading);
 </script>
 
 <style scoped lang="less">
@@ -104,7 +104,7 @@ body{
         .price{
             font-size:18px;
            
-            color:#ff422c;
+            color:#fa4926;
 
         }
         .time{

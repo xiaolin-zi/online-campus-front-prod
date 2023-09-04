@@ -34,6 +34,11 @@ const parttimeRequest = axios.create({
   timeout: 90000,
 });
 
+const tradeRequest = axios.create({
+  baseURL: '/trade-api',
+  timeout: 90000,
+});
+
 gatewayRequest.interceptors.request.use(reqSuccessCallback, errCallback);
 gatewayRequest.interceptors.response.use(respSuccessCallback, errCallback);
 
@@ -52,6 +57,9 @@ ossRequest.interceptors.response.use(respSuccessCallback, errCallback);
 parttimeRequest.interceptors.request.use(reqSuccessCallback, errCallback);
 parttimeRequest.interceptors.response.use(respSuccessCallback, errCallback);
 
+tradeRequest.interceptors.request.use(reqSuccessCallback, errCallback);
+tradeRequest.interceptors.response.use(respSuccessCallback, errCallback);
+
 export {
   gatewayRequest,
   userRequest,
@@ -59,4 +67,5 @@ export {
   contactRequest,
   ossRequest,
   parttimeRequest,
+  tradeRequest
 }

@@ -1,3 +1,4 @@
+import { initMessageApi } from './../apis/message/index';
 import { createRouter, createWebHistory } from 'vue-router';
 import { useGlobalStore } from '@/stores/useGlobalStore';
 import { showToast } from 'vant';
@@ -117,6 +118,11 @@ const router = createRouter({
       path:'/campus/user/detail',
       name:'线上校园-用户-个人资料',
       component:() => import('@/views/user/detail/index.vue'),
+    },
+    {
+      path:'/campus/user/detail/myname',
+      name:'线上校园-用户-个人资料-修改名字',
+      component:() => import('@/views/user/EditDetail/myName.vue')
     },
     {
       path:'/campus/user/balance',

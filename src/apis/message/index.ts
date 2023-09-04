@@ -12,13 +12,12 @@ interface SendBody {
 // export const initUserMessage = () => {
 //   return messageRequest({
 //     method: 'get',
-//     url: '/campusMessage/message/initUserMessage',   
+//     url: '/message/initUserMessage',   
 //   });
 // }
 
 // 消息初始化
 export const initMessageApi = () => {
-  console.log('initMessage');
   return messageRequest({
     method: 'get',
     url: '/message/initMessage',   

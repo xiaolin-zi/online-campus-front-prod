@@ -1,21 +1,32 @@
 <template>
- <div class="row" v-for="item in 6">
-  <div class="deal-card" v-for="item in 2">
+ <div class="row" v-for="item in dealCard" :key="item">
+  <div class="deal-card" v-for="i in 2">
     <div class="card-img">
-      <img src="../../assets/晚霞.jpg" alt="">
+      <img :src="item.images" alt="">
     </div>
     <div class="card-message">
-      <div  class="title">实用的家具套餐</div>
-        <div  class="features">应届生·三个月·不加班</div>
-        <div class="price">￥666</div>
+        <div class="title">{{ item.categoryName }}</div>
+        <div class="features">{{ item.subCategoryName }}</div>
+        <div class="price">￥{{ item.price }}</div>
     </div>
   </div>
  </div>
 </template>
 
 <script setup lang="ts">
+import { ref, reactive, onMounted } from 'vue'
+import { getTradeApi } from '@/apis/trade/index';
 
-
+const lazy = ref({})
+let dealCard = ref<any[]>([])
+const lazyloading = async() => {
+  const { data: res } = await getTradeApi('0')
+  lazy.value = res.data;
+  // lazy.value = await getTradeApi('0');
+  // console.log(lazy);
+  dealCard.value = res.data.data
+}
+onMounted(lazyloading);
 </script>
 
 <style scoped lang="less">

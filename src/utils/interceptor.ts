@@ -9,7 +9,7 @@ export const reqSuccessCallback = (config: any) => {
   let token = globalStore.token, uid = globalStore.uid;
   // console.log('request interceptor', uid, token);
 
-  if (token != null || token !== undefined || token !== '') {
+  if (token !== '') {
     config.headers.token = token;
     config.headers.uid = uid;
   } else {
