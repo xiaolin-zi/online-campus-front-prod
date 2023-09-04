@@ -10,7 +10,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'campus/dashboard'
+      redirect: 'campus'
     },
     {
       path: '/campus',
@@ -134,15 +134,15 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const globalStore = useGlobalStore();
-  let token = globalStore.token;
+  let token = globalStore.token.trim();
 
-  // console.log('router beforeEach', from.path, to.path);
+  console.log('router beforeEach', from.path, to.path,);
 
   if (to.path === '/login' || to.path === '/register') {
     closeWebSocket();
     next();
   } else {
-    if (token != null || token !== '' || token !== undefined) {
+    if (token !== '') {
       console.log('尝试关闭原有ws');
       closeWebSocket();
 
