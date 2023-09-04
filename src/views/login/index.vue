@@ -344,7 +344,7 @@ export default {
 .mainBox {
   width: 350px;
   background-color: #fff;
-  height: 350px;
+  height: 370px;
   border-radius: 10px;
   overflow: hidden;
 }
