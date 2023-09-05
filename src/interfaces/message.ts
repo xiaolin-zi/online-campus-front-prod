@@ -23,3 +23,11 @@ export interface System {
   createTime: string
   sender: string
 }
+
+export interface SendBody {
+  content?: string
+  sender?: string
+  receiver?: string
+  type?: number
+  isPhoto?: boolean
+}

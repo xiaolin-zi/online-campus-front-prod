@@ -21,7 +21,7 @@
 <script>
 import { reactive, ref } from 'vue';
 import router from '@/router';
-import forgetApi from '@/apis/user/forget';
+import { getUserInfoByAccountApi } from '@/apis/user/forget';
 import { ElMessage } from "element-plus";
 import CryptoJS from 'crypto-js';
 
@@ -60,7 +60,7 @@ export default {
 
     const toForget = () => {
       //查找账号是否存在
-      forgetApi.getUserInfoByAccount(account.value).then(res => {
+      getUserInfoByAccountApi(account.value).then(res => {
         if (res.data.code == 0) {
           //存在则携带账号信息跳转到验证页面，否则提示账号不存在
           ElMessage({

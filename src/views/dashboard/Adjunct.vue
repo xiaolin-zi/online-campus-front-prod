@@ -33,11 +33,11 @@ import { getAdjunctApi } from '@/apis/parttime/index';
 import { showToast } from 'vant';
 
 
-const lazy = ref<Job>();
+// const lazy = ref<Job>();
 let adCard = ref<Job[]>([])//存放数据
-const lazyloading = async() => {
+const lazyLoadingAdjunct = async() => {
     const { data: res } = await getAdjunctApi(0);
-    console.log(res);
+    console.log('lazyLoadingAdjunct', res);
     if (res.code === 0) {
       // lazy.value = res.data;
       adCard.value = res.data;
@@ -49,7 +49,9 @@ const lazyloading = async() => {
     // console.log(adCard.value);
     
 }
-onMounted(lazyloading);
+
+onMounted(lazyLoadingAdjunct);
+
 </script>
 
 <style scoped lang="less">
@@ -103,7 +105,6 @@ body{
 
         .price{
             font-size:18px;
-           
             color:#fa4926;
 
         }

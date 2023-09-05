@@ -1,6 +1,5 @@
 <template>
 <div class="user-box">
-  
   <div class="box-top">
     <div class="user-avatar">
         <img src="../../assets/img/avatar1.jpg" alt="">
@@ -54,17 +53,22 @@
 
   <div class="box-buttons">
     <van-button size="large" to="user/account">账号与安全</van-button>
-    <van-button size="large">退出登录</van-button>
+    <van-button size="large" @click="handleLogout">退出登录</van-button>
   </div>
 </div>
-
-
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { ref, reactive, onMounted } from 'vue';
-import { getDetailApi } from '../../apis/user/index.js'
+import { getDetailApi, logoutApi } from '@/apis/user/index'
+import { clearMessageCacheApi } from '@/apis/message/index'
+import { showConfirmDialog, showToast } from 'vant';
+import { useGlobalStore } from '@/stores/useGlobalStore';
+
+const globalStore = useGlobalStore();
+const router = useRouter();
+
 //我的交易和我的兼职切换逻辑
 const contentText = ref('我的交易')
 const buttonText = ref('我的兼职')
@@ -74,7 +78,6 @@ const buttonContent = () => {
   //控制页面是否渲染，不能仅仅更换内容因为后期点击后跳转的是不同的页面
   isBottom1Visible.value = !isBottom1Visible.value
 
-  
   if(buttonStatus.value){
     contentText.value = '我的交易'
     buttonText.value = '我的兼职'
@@ -88,14 +91,36 @@ const buttonContent = () => {
 }
 
 //调用getDetail接口渲染用户信息
-const userdata = reactive<any>({})
-const userCard = ref<any>([])
-const getUser = async() => {
-  userdata.value = await getDetailApi()
-  userCard.value = userdata.value.data.data 
-  console.log(userCard.value)
+const userCard = ref<any>([]);
+const getUser = async () => {
+  const { data: res } = await getDetailApi();
+  console.log('getUser', res);
+  userCard.value = res.data;
+  console.log(userCard.value);
 }
-onMounted(getUser)
+
+onMounted(getUser);
+
+const handleLogout = () => {
+  showConfirmDialog({
+    title: '提示',
+    message: '确认退出登录?'
+  }).then(async () => {
+    const { data: res } = await logoutApi();
+    if (res.code === 0) {
+      // 先清除消息缓存然后再清理token
+      const { data: res2 } = await clearMessageCacheApi();
+      
+      if (res2.code === 0) {
+        globalStore.$reset();
+        showToast('你已成功退出~');
+        router.push('/login');
+      } else showToast('OOPS! 内部小错误,请稍后重试!');
+    } else showToast('OOPS! 内部小错误,请稍后重试!');
+
+  }).catch(() => showToast('已取消操作'));
+}
+
 </script>
 
 <style lang="less" scoped>

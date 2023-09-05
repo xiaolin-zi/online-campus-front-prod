@@ -87,12 +87,12 @@ export default {
     const locationMsg = ref('所在位置');
     const statusMsg = ref('动态阅读权限');
 
-    const { uid, username } = storeToRefs(useGlobalStore ());
+    const { uid, username } = storeToRefs(useGlobalStore());
     dynamic.promulgatorId = uid.value;
     dynamic.promulgatorName = username.value;
 
     
-    const beforeRead = (file: File|any) => {
+    const beforeRead = (file: File | any) => {
       if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
         showToast('仅支持上传jpg/png格式的图片');
         return false;
@@ -155,6 +155,7 @@ export default {
     },
     async releaseDynamic() {
       this.dynamic.photos = [];
+      this.isDisabled = true;
       
       let fileArr = toRaw(this.fileList);
 
@@ -180,7 +181,10 @@ export default {
       if (insertRes && insertRes.code === 0) {
         showToast('动态发布成功!');
         this.$router.push('/campus/contact');
-      } else showToast('内部错误, 请稍后重试!');
+      } else {
+        showToast('内部错误, 请稍后重试!');
+        this.isDisabled = false;
+      }
     },
     async getLocation() {
       const { data: ipRes } = await getIpInfo();

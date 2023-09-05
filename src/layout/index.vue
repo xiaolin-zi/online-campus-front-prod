@@ -1,44 +1,35 @@
-<!-- 导航栏，全局 -->
 <template>
   <div class="layout-box">
-    <!-- 子路由出口 -->
     <div class="layout-main">
       <router-view/>
     </div>
     <van-tabbar v-model="active" class="tabber" active-color="#73c975" route>
-      <van-tabbar-item class="tab" to="/campus/dashboard">
+      <van-tabbar-item
+        v-for="item in tabbarItemList" 
+        :key="item.title" 
+        class="tab" 
+        :to="item.toPath">
         <template #icon>
-          <van-icon name="wap-home-o" size="18"/>
+          <van-icon :name="item.iconName" size="18" dot/>
         </template>
-        <span>首页</span>
-      </van-tabbar-item>
-      <van-tabbar-item class="tab" to="/campus/contact">
-        <template #icon>
-          <van-icon name="eye-o" size="18" dot/>
-        </template>
-        <span>发现</span>
-      </van-tabbar-item>
-      <van-tabbar-item class="tab" to="/campus/message">
-        <template #icon>
-          <van-icon name="chat-o" size="18" dot/>
-        </template>
-        <span>消息</span>
-      </van-tabbar-item>
-      <van-tabbar-item class="tab" to="/campus/user"  >
-        <template #icon>
-          <van-icon name="contact" size="18" dot/>
-        </template>
-        <span>我的</span>
+        <span>{{ item.title }}</span>
       </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 
 const active = ref(0);
 onMounted(() => { active.value = 0; });
+
+const tabbarItemList = reactive([
+  { toPath: '/campus/dashboard', iconName: 'wap-home-o', title: '首页' },
+  { toPath: '/campus/contact', iconName: 'eye-o', title: '发现' },
+  { toPath: '/campus/message', iconName: 'chat-o', title: '消息' },
+  { toPath: '/campus/user', iconName: 'contact', title: '我的' }
+]);
 
 </script>
 

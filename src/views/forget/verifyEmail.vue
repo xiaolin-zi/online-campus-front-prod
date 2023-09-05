@@ -124,7 +124,7 @@
 import { reactive, ref } from 'vue';
 import router from '@/router';
 import CryptoJS from 'crypto-js';
-import forgetApi from "@/apis/user/forget";
+import { getEmailCodeApi, checkEmailCodeApi, updatePasswordApi } from "@/apis/user/forget";
 import { ElMessage } from "element-plus";
 
 export default {
@@ -219,7 +219,7 @@ export default {
         } else {
           isCountDownShow.value = true;
           console.log(verifyEmail.email);
-          forgetApi.getEmailCode(verifyEmail.email).then((res) => {
+          getEmailCodeApi(verifyEmail.email).then((res) => {
             startCountDown();
             if (res.data.code == 0) {
               ElMessage({
@@ -246,7 +246,7 @@ export default {
       verifyEmailForm.value.validate((valid) => {
         if (valid) {
           //验证邮箱验证码是否正确
-          forgetApi.checkEmailCode(verifyEmail).then((res) => {
+          checkEmailCodeApi(verifyEmail).then((res) => {
             if (res.data.code == 0) {
               ElMessage({
                 message: '验证成功',
@@ -302,7 +302,7 @@ export default {
       resetData.password =  myencrypt(resetData.password)
       resetData.confirmPassword = myencrypt(resetData.confirmPassword)
       //修改密码
-      forgetApi.updatePassword(resetData).then((res) => {
+      updatePasswordApi(resetData).then((res) => {
         if (res.data.code == 0) {
           ElMessage({
             message: '修改成功',

@@ -1,3 +1,4 @@
+// 职位
 export interface Job {
   jobId: string,
   jobTitle: string,

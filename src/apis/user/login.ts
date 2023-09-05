@@ -25,11 +25,3 @@ export const sendPhoneCodeApi = (phone: any) => {
     url: `/campusUser/send/${phone}`
   });
 }
-
-// 退出登录
-export const logoutApi = () => {
-  return gatewayRequest({
-    method: 'get',
-    url: '/campusUser/logout'
-  });
-}

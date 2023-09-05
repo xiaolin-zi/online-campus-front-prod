@@ -14,8 +14,12 @@
           @click="toMyDetail"/>
       </template>
     </van-nav-bar>
+
     <div class="main-box">
       <van-loading size="24px" v-if="isLoading" class="loading-box" text-size="20px">Loading...</van-loading>
+      <van-empty image="network" description="网络出错啦!" v-show="isNetworkError"/>
+      <van-empty description="一片空白......" v-show="contactList.values.length === 0 && isLoading === false"/>
+
       <dynamicItem
         v-for="item in contactList.values" 
         v-bind:key="item._id" 
@@ -23,13 +27,15 @@
         @on-comment="showSheetFn"
         @on-like="insertLike"
         @on-dislike="cancelLike"/>
+      
       <van-floating-bubble axis="xy" magnetic="x" icon="edit" @click="toAdd"/>
-      <van-back-top target=".main-box"/>
-
-      <van-empty image="network" description="网络出错啦!" v-show="isNetworkError"/>
-      <van-empty description="一片空白......" v-show="contactList.values.length === 0 && isLoading === false"/>
     </div>
-    <van-action-sheet :show="showSheet" :title="sheetTitle" @cancel="showSheet = false">
+    <van-back-top bottom="100px" right="20px"/>
+
+    <van-action-sheet 
+      :show="showSheet" 
+      :title="sheetTitle" 
+      @cancel="showSheet = false">
       <div class="sheet-box">
         <div class="sheet-main">
           <commentItem
@@ -99,7 +105,7 @@ const getAllContacts = async () => {
   if (listRes && listRes.code === 0) {
     contactList.values = listRes.data;
   } else {
-    isNetworkError.value = true
+    isNetworkError.value = true;
   }
   isLoading.value = false;
 }
@@ -250,6 +256,7 @@ const toMyDetail = () => {
     overflow: auto;
     width: 100%;
     height: 100%;
+    // height: 3100px;
     margin-top: 50px;
     margin-bottom: 100px;
 

@@ -23,19 +23,18 @@ const router = createRouter({
           path: '/campus/dashboard',
           name: '线上校园-总首页',
           component: () => import('@/views/dashboard/index.vue'),
-            children:[
-              {
-                path:'',
-                name:'线上校园-首页-交易',
-                component:() => import('@/views/dashboard/Deal.vue')
-              },
-              {
-                path:'adjunct',
-                name:'线上校园-首页-兼职',
-                component:() => import('@/views/dashboard/Adjunct.vue')
-              },
-              
-            ]
+          children:[
+            {
+              path:'/campus/dashboard/deal',
+              name:'线上校园-首页-交易',
+              component:() => import('@/views/dashboard/Deal.vue')
+            },
+            {
+              path:'/campus/dashboard/adjunct',
+              name:'线上校园-首页-兼职',
+              component:() => import('@/views/dashboard/Adjunct.vue')
+            }
+          ]
         },
         {
           path: '/campus/contact',
@@ -122,7 +121,7 @@ const router = createRouter({
     {
       path:'/campus/user/detail/myname',
       name:'线上校园-用户-个人资料-修改名字',
-      component:() => import('@/views/user/EditDetail/myName.vue')
+      component:() => import('@/views/user/edit-detail/my-name/index.vue')
     },
     {
       path:'/campus/user/balance',
@@ -155,7 +154,7 @@ router.beforeEach((to, from, next) => {
       console.log(`成功切换页面: '${from.path}' ---> '${to.path}'`);
 
       console.log('尝试创建新ws');
-      openWebSocket(`ws://117.72.15.203:9000/campusMessage/websocket/${globalStore.uid}`);
+      openWebSocket(`wss://117.72.15.203/campusMessage/websocket/${globalStore.uid}`);
       next();
     } else {
       closeWebSocket();

@@ -17,7 +17,7 @@
         <van-collapse-item title="系统消息" name="system">
           <div class="sys-box" @click="toSys">
             <div class="icon-box">
-              <van-icon name="volume" size="28" color="#f6f6f6" style="margin: 10px auto;"/>
+              <van-icon name="volume" size="33" color="#f6f6f6" style="margin: 10px auto;"/>
             </div>
             <div class="right-title">
               <p>系统通知</p>

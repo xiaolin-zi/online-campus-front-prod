@@ -1,12 +1,5 @@
 import { messageRequest } from '@/utils/request';
-
-interface SendBody {
-    content?: string
-    sender?: string
-    receiver?: string
-    type?: number
-    isPhoto?: boolean
-}
+import { SendBody } from '@/interfaces/message';
 
 // 消息初始化
 // export const initUserMessage = () => {
@@ -33,24 +26,33 @@ export const clickMyMessageApi = () => {
 
 // 获取用户的聊天记录
 export const getUserChatRecords = (friendId: any) => {
-    return messageRequest({
-        method: 'get',
-        url: `/message/lazyLoadingChatRecords?friendId=${friendId}`,   
-    });
+  return messageRequest({
+    method: 'get',
+    url: `/message/lazyLoadingChatRecords?friendId=${friendId}`,   
+  });
 }
 
 // 清除未读
 export const clearUnReadApi = () => {
-    return messageRequest({
-        method: 'get',
-        url: '/message/clearUnRead',   
-    })
+  return messageRequest({
+    method: 'get',
+    url: '/message/clearUnRead',   
+  });
 }
 
-export const sendMessage = (data: SendBody) => {
-    return messageRequest({
-        method: 'post',
-        url: '/message/send',
-        data
-    })
+// 发送消息
+export const sendMessageApi = (data: SendBody) => {
+  return messageRequest({
+    method: 'post',
+    url: '/message/send',
+    data
+  });
+}
+
+// 清除消息缓存
+export const clearMessageCacheApi = () => {
+  return messageRequest({
+    method: 'get',
+    url: '/message/clearCache'
+  });
 }

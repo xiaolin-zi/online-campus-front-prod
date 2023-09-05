@@ -111,7 +111,7 @@
 <script lang="ts">
 import { reactive, ref } from 'vue';
 import { loginApi, loginByPhoneApi, sendPhoneCodeApi } from '@/apis/user/login';
-import { ElMessage, FormInstance, FormRules } from 'element-plus'
+import { ElMessage, FormInstance } from 'element-plus'
 import router from '@/router';
 import { initMessageApi } from '@/apis/message/index';
 import { useGlobalStore } from '@/stores/useGlobalStore';

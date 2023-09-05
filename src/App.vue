@@ -24,4 +24,11 @@ html, body {
   width: 100%;
   height: 100%;
 }
+
+.van-floating-bubble {
+  background: #73c975;
+}
+.van-back-top {
+  background: #0a1629;
+}
 </style>

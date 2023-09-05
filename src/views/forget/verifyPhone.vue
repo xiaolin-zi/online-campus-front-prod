@@ -124,8 +124,8 @@
 import {reactive, ref} from 'vue';
 import router from '@/router';
 import CryptoJS from "crypto-js";
-import loginApi from "@/apis/user/login";
-import forgetApi from "@/apis/user/forget";
+import { sendPhoneCodeApi } from "@/apis/user/login";
+import { updatePasswordApi } from "@/apis/user/forget";
 import { ElMessage } from "element-plus";
 
 export default {
@@ -216,7 +216,7 @@ export default {
           return;
         } else {
           isCountDownShow.value = true;
-          loginApi.sendPhoneCode(verifyPhone.telephone).then((res) => {
+          sendPhoneCodeApi(verifyPhone.telephone).then((res) => {
             startCountDown();
             if (res.data.code == 0) {
               ElMessage({
@@ -302,7 +302,7 @@ export default {
       resetData.password =  myencrypt(resetData.password)
       resetData.confirmPassword = myencrypt(resetData.confirmPassword)
       //修改密码
-      forgetApi.updatePassword(resetData).then((res) => {
+      updatePasswordApi(resetData).then((res) => {
         if (res.data.code == 0) {
           ElMessage({
             message: '修改成功',

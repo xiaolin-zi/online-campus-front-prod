@@ -122,6 +122,7 @@ const scrollToBottom = () => {
   messageBox.value.scrollTop = messageBox.value.scrollHeight;
 }
 
+// 获取历史聊天记录
 const getData = async () => {
   const { data: res } = await getUserChatRecords(id);
   console.log('getData', res);
@@ -176,9 +177,7 @@ onUnmounted(() => {
 });
 
 const keyDown = (e: any) => {
-  if (e.keyCode === 13) {
-    send();
-  }
+  if (e.keyCode === 13) { send(); }
 };
 
 // 发送
@@ -192,10 +191,6 @@ const send = async () => {
   }
 
   wsSendMsg(agentData, successCallback);
-
-  // webSocketInit(`ws://10.120.50.161:7002/${url}/${uid}`, agentData);
-  // webSocketInit(`ws://117.72.15.203:9000/${url}/${uid.value}`, agentData, successCallback);
-
   textarea.value = '' // 聊天框清空
   
 };

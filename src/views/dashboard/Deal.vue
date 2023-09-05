@@ -1,32 +1,33 @@
 <template>
- <div class="row" v-for="item in dealCard" :key="item">
-  <div class="deal-card" v-for="i in 2">
-    <div class="card-img">
-      <img :src="item.images" alt="">
-    </div>
-    <div class="card-message">
+  <div class="row" v-for="item in dealCard" :key="item.productId">
+    <div class="deal-card" v-for="i in 2">
+      <div class="card-img">
+        <img :src="item.images[0]" alt="">
+      </div>
+      <div class="card-message">
         <div class="title">{{ item.categoryName }}</div>
         <div class="features">{{ item.subCategoryName }}</div>
         <div class="price">￥{{ item.price }}</div>
+      </div>
     </div>
   </div>
- </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
+import { Product } from '@/interfaces/trade';
 import { getTradeApi } from '@/apis/trade/index';
 
-const lazy = ref({})
-let dealCard = ref<any[]>([])
-const lazyloading = async() => {
-  const { data: res } = await getTradeApi('0')
-  lazy.value = res.data;
-  // lazy.value = await getTradeApi('0');
-  // console.log(lazy);
-  dealCard.value = res.data.data
+const dealCard = reactive<Product[]>([]);
+const lazyLoadDealCard = async() => {
+  const { data: res } = await getTradeApi(0);
+  console.log('deal', res);
+  if (res.code === 0) {
+    dealCard.values = res.data;
+  }
 }
-onMounted(lazyloading);
+
+onMounted(lazyLoadDealCard);
 </script>
 
 <style scoped lang="less">

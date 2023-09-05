@@ -11,7 +11,7 @@ export const reqSuccessCallback = (config: any) => {
 
   if (token !== '') {
     config.headers.token = token;
-    config.headers.uid = uid;
+    // config.headers.uid = uid;
   } else {
     showToast('token无效或已过期, 请重新登录!');
     globalStore.$reset();
