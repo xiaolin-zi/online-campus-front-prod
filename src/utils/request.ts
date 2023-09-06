@@ -1,41 +1,43 @@
 import axios from 'axios';
 import { reqSuccessCallback, respSuccessCallback, errCallback } from '@/utils/interceptor';
-
 const gatewayRequest = axios.create({
-  baseURL: '/gateway-api',
+  baseURL: 'https://117.72.15.203/',
   timeout: 90000,
 });
 
 const userRequest = axios.create({
-  baseURL: '/user-api',
+  baseURL: 'https://117.72.15.203/CampusUser/',
   timeout: 90000,
 });
 
 const messageRequest = axios.create({
-  baseURL: '/message-api',
+  baseURL: 'https://117.72.15.203/campusMessage/',
   timeout: 90000,
 });
 
 const contactRequest = axios.create({
-  baseURL: '/contact-api',
+  baseURL: 'https://117.72.15.203/campusContact/',
   timeout: 90000,
 });
 
 const ossRequest = axios.create({
-  baseURL: '/oss-api',
+  baseURL: 'https://117.72.15.203/campusOss/',
   timeout: 90000,
   headers: {
     'Content-Type': 'multipart/form-data'
   }
 });
 
+
+
+
 const parttimeRequest = axios.create({
-  baseURL: '/parttime-api',
+  baseURL: 'https://117.72.15.203/campusParttime',
   timeout: 90000,
 });
 
 const tradeRequest = axios.create({
-  baseURL: '/trade-api',
+  baseURL: 'https://117.72.15.203/campusTrade',
   timeout: 90000,
 });
 
