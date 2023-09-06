@@ -6,7 +6,7 @@ const gatewayRequest = axios.create({
 });
 
 const userRequest = axios.create({
-  baseURL: 'https://117.72.15.203/CampusUser/',
+  baseURL: 'https://117.72.15.203/campusUser/',
   timeout: 90000,
 });
 
