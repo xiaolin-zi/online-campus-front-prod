@@ -113,12 +113,12 @@
   </div>
 </template>
 
-<script>
-import {reactive, ref} from 'vue';
-import { sendPhoneCodeApi } from "@/apis/user/login";
-import { ElMessage } from "element-plus";
-import { registerApi } from "@/apis/user/register";
-import router from "@/routers";
+<script lang="ts">
+import { reactive, ref } from 'vue';
+import { sendPhoneCodeApi } from '@/apis/user/login';
+import { ElMessage } from 'element-plus';
+import { registerApi } from '@/apis/user/register';
+import router from '@/router';
 
 export default {
 
@@ -127,15 +127,15 @@ export default {
     const registForm = ref(null);
 
     const regist = reactive({
-      account: "",
-      code: "",
-      username: "",
-      telephone: "",
-      password: "",
-      confirmPassword: "",
+      account: '',
+      code: '',
+      username: '',
+      telephone: '',
+      password: '',
+      confirmPassword: '',
     });
 
-    const checkPhone = (rule, value, callback) => {
+    const checkPhone = (rule: any, value: any, callback: any) => {
       //debugger
       if (!/^1[34578]\d{9}$/.test(value)) {
         return callback(new Error("手机号码格式不正确"));
@@ -148,11 +148,11 @@ export default {
     const isCountDownShow = ref(false);
 
     // 倒计时名称
-    let timer;
+    let timer: any;
 
     const toRegist = async () => {
       registForm.value.validate(
-          (valid) => {
+          (valid: any) => {
             if (valid) {
               registerApi(regist).then((res) => {
                 if (res.data.code == 0) {
@@ -196,7 +196,7 @@ export default {
     };
 
 
-    const checkPassword = (rule, value, callback) => {
+    const checkPassword = (rule: any, value: any, callback: any) => {
       //debugger
       if (value !== regist.password) {
         return callback(new Error("确认密码和密码不一致"));
@@ -207,7 +207,7 @@ export default {
     const getCode = async () => {
       //先判断手机号是否正确
       //先判断手机号是否正确
-      registForm.value.validateField("telephone", (valid) => {
+      registForm.value.validateField("telephone", (valid: any) => {
         console.log(valid);
         if (!valid) {
           return;

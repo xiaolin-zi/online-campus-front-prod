@@ -25,11 +25,10 @@
             <p class="message-time">{{ item.createTime }}</p>
             <div class="message" :class="item.receiver !== user.userId ? '' : 'message-send'">
               <template v-if="item.receiver !== user.userId">
-                <el-image style="width: 40px; height: 40px; border-radius: 5px" :src="user.userImage" />
+                <el-image class="avatar" :src="user.userImage" />
               </template>
               <template v-else>
-                <el-image style="width: 40px; height: 40px; border-radius: 5px"
-                  :src="userImg" />
+                <el-image class="avatar" :src="userinfo.userImage" />
               </template>
               <div class="message-content">
                 <div class="text-message" :class="item.receiver !== user.userId ? 'text-message-receiver' : 'text-message-send'">
@@ -86,13 +85,13 @@ const router = useRouter();
 
 const id: any = route.params.id
 
-const { uid, username, userImg } = storeToRefs(useGlobalStore());
+const { userinfo } = storeToRefs(useGlobalStore());
 
 const user = ref<User>({})
 const chatList = ref<ChatList[]>([])
 
 const faceList = ref<string[]>([]);
-const textarea = ref<string>("");
+const textarea = ref<string>('');
 
 const disabled = computed(() => (textarea.value.length === 0 ? true : false));
 
@@ -186,7 +185,7 @@ const send = async () => {
     content: textarea.value,
     type: 0,
     receiver: user.value.userId,
-    sender: uid.value,
+    sender: userinfo.value.uid,
     isPhoto: false
   }
 
@@ -259,6 +258,12 @@ const errCallback = (data: any) => {
           display: flex;
           align-items: flex-start;
           margin: 20px 0;
+
+          .avatar {
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%;
+          }
 
           .message-content {
             display: flex;

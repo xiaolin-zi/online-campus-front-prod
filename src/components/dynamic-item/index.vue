@@ -2,7 +2,7 @@
   <div class="dynamic-item-box">
     <div class="main-box">
       <div class="left-box">
-        <van-image :src="avatar2" round class="avatar"/>
+        <van-image :src="item.promulgatorImage" round class="avatar"/>
       </div>
       <div class="right-box">
         <div class="author">
@@ -58,7 +58,7 @@ import { Dynamic } from '@/interfaces/contact';
 
 const props = defineProps<{ item: Dynamic }>();
 const emit = defineEmits(['on-like', 'on-dislike', 'on-comment']);
-const { uid } = storeToRefs(useGlobalStore());
+const { userinfo } = storeToRefs(useGlobalStore());
 const likeIcon = ref(false);
 
 // 点赞图标切换
@@ -66,7 +66,7 @@ const likeIconToggle = () => {
   let dynamic: any = props.item;
   // console.log(props.item);
   // console.log(dynamic.likeId, uid.value);
-  if (dynamic.likeId.indexOf(uid.value) !== -1) {
+  if (dynamic.likeId.indexOf(userinfo.value.uid) !== -1) {
     likeIcon.value = true;
   } else likeIcon.value = false;
 }

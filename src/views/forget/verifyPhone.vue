@@ -106,7 +106,7 @@
             </el-form>
           </div>
         </div>
-        <div v-if="active==2">
+        <div v-if="active == 2">
           <p style="margin-top: 30px;color: #79797c">您已成功修改密码，是否前往登录？</p>
           <div style="margin-top: 30px">
             <el-button type="primary" @click="tologin"
@@ -120,10 +120,13 @@
   </div>
 </template>
 
+<!-- <script lang="ts">
+
+</script> -->
 <script>
-import {reactive, ref} from 'vue';
-import router from '@/routers';
-import CryptoJS from "crypto-js";
+import { reactive, ref } from 'vue';
+import router from '@/router';
+// import CryptoJS from "crypto-js";
 import { sendPhoneCodeApi } from "@/apis/user/login";
 import { updatePasswordApi } from "@/apis/user/forget";
 import { ElMessage } from "element-plus";
@@ -131,8 +134,6 @@ import { ElMessage } from "element-plus";
 export default {
 
   setup() {
-
-
     // 此处key为16进制
     let key = 'S0JsiZY2eHlgnRmv';// 密钥，用于对称加密
 
@@ -167,12 +168,9 @@ export default {
     }
 
 
-    const active = ref(0)
-
-    const radio = ref(1)
-
+    const active = ref(0);
+    const radio = ref(1);
     const countDownSecond = ref(60);
-
     const isCountDownShow = ref(false);
 
     const verifyPhone = reactive({
@@ -187,7 +185,7 @@ export default {
         return callback(new Error("手机号码格式不正确"));
       }
       return callback();
-    };
+    }
 
 
     const resetData = reactive({
@@ -202,7 +200,7 @@ export default {
         return callback(new Error("确认密码和密码不一致"));
       }
       return callback();
-    };
+    }
 
     // 倒计时名称
     let timer;

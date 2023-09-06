@@ -24,6 +24,7 @@ export interface Comment {
   _class: string,
   content: string,
   sender: string,
+  senderImage?: string,
   receiver: string,
   senderName: string,
   receiverName: string,

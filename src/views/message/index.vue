@@ -45,8 +45,6 @@ import { clickMyMessageApi, clearUnReadApi } from '@/apis/message/index';
 import friendItem from '@/components/friend-item/index.vue';
 
 const router = useRouter();
-const keywords = ref<string>("");
-const friendsShow = ref<Boolean>(false);
 const userList = ref<List[]>([]);
 const activeName = ref(['system', 'friend']);
 

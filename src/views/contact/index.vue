@@ -10,15 +10,15 @@
         <van-icon name="bell" size="25" color="#0a1629" :dot="true" @click="toSys"/>
         <van-image round class="avatar"
           fit="cover"
-          :src="avatar2"
+          :src="userinfo.userImage"
           @click="toMyDetail"/>
       </template>
     </van-nav-bar>
 
     <div class="main-box">
       <van-loading size="24px" v-if="isLoading" class="loading-box" text-size="20px">Loading...</van-loading>
-      <van-empty image="network" description="网络出错啦!" v-show="isNetworkError"/>
-      <van-empty description="一片空白......" v-show="contactList.values.length === 0 && isLoading === false"/>
+      <van-empty image="network" description="网络出错啦!" v-show="isNetworkError && !isLoading"/>
+      <van-empty description="一片空白......" v-show="contactList.values.length === 0 && !isLoading"/>
 
       <dynamicItem
         v-for="item in contactList.values" 
@@ -68,8 +68,8 @@ import { useRouter } from 'vue-router';
 import { useGlobalStore } from '@/stores/useGlobalStore';
 import { Dynamic } from '@/interfaces/contact';
 
-// 获取当前username和uid
-const { uid, username } = storeToRefs(useGlobalStore());
+// 获取当前的 userinfo (user个人信息)
+const { userinfo } = storeToRefs(useGlobalStore());
 
 const contactIndexTitle = ref('#');
 
@@ -91,7 +91,7 @@ const router = useRouter();
 onMounted(() => {
   // console.log('on Mounted.');
   getAllContacts();
-  contactIndexTitle.value = `${username.value} 交际圈`;
+  contactIndexTitle.value = `${userinfo.value.username} 交际圈`;
 });
 
 // onUpdated(() => {
@@ -100,14 +100,17 @@ onMounted(() => {
 
 // 获取所有动态
 const getAllContacts = async () => {
-  const { data: listRes } = await searchDynamicApi();
-  console.log('listRes', listRes);
-  if (listRes && listRes.code === 0) {
-    contactList.values = listRes.data;
-  } else {
+  try {
+    const { data: listRes } = await searchDynamicApi();
+    console.log('listRes', listRes);
+    if (listRes && listRes.code === 0) {
+      contactList.values = listRes.data;
+    }
+  } catch(err: any) {
     isNetworkError.value = true;
+  } finally {
+    isLoading.value = false;
   }
-  isLoading.value = false;
 }
 
 // 展示评论区
@@ -131,8 +134,8 @@ const sendComment = () => {
   showConfirmDialog({ title: '提示', message: '确认发送评论?' }).then(async () => {
     let addCommentForm = {
       dynamicId: _id,
-      senderId: uid.value,
-      senderName: username.value,
+      senderId: userinfo.value.uid,
+      senderName: userinfo.value.username,
       content: commentContent.value
     };
     // console.log('直接评论', addCommentForm);
@@ -156,7 +159,7 @@ const handleReplyFinish = async () => {
 // 点赞或取消点赞
 const insertLike = async (dynamicId: string) => {
   // console.log('handle like: ', dynamicId, username.value);
-  const { data: res } = await insertLikeApi(dynamicId, username.value);
+  const { data: res } = await insertLikeApi(dynamicId, userinfo.value.username);
   if (res && res.code === 0) {
     showToast('点赞成功~');
     getAllContacts(); // 刷新
@@ -166,7 +169,7 @@ const insertLike = async (dynamicId: string) => {
 }
 const cancelLike = async (dynamicId: string) => {
   // console.log('handle like: ', dynamicId, username.value);
-  const { data: res } = await deleteLikeApi(dynamicId, username.value);
+  const { data: res } = await deleteLikeApi(dynamicId, userinfo.value.username);
   if (res && res.code === 0) {
     showToast('已取消点赞~');
     getAllContacts(); // 刷新

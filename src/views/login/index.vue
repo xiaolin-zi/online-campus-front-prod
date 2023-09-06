@@ -111,6 +111,7 @@
 <script lang="ts">
 import { reactive, ref } from 'vue';
 import { loginApi, loginByPhoneApi, sendPhoneCodeApi } from '@/apis/user/login';
+import { getDetailApi } from '@/apis/user/index';
 import { ElMessage, FormInstance } from 'element-plus'
 import router from '@/routers';
 import { initMessageApi } from '@/apis/message/index';
@@ -128,7 +129,7 @@ export default {
       loginName: "",
       password: "",
     });
-    const loginByPhone = reactive({telephone: "", code: ""});
+    const loginByPhone = reactive({ telephone: "", code: "" });
     const activeName = ref("first");
     const countDownSecond = ref(60);
     const isCountDownShow = ref(false);
@@ -149,6 +150,18 @@ export default {
       console.log('Login Success!, Now initMessage: ', res);
     }
 
+    const initUserInfo = async () => {
+      const { data: res } = await getDetailApi();
+      let userinfo = {
+        uid: res.data.userId,
+        username: res.data.username,
+        userImage: res.data.userImage,
+        consignee: res.data.consignee,
+      };
+      console.log('Login Success!, Now initUserInfo: ', userinfo);
+      globalStore.setUserInfo(userinfo);
+    }
+
     //登录
     const tologin = async () => {
       loginForm.value.validate(
@@ -167,10 +180,9 @@ export default {
 
                   // 设置 token 和 uid 以及 username
                   globalStore.setToken(res.data.data.token);
-                  globalStore.setUid(res.data.data.uid);
-                  globalStore.setUsername(res.data.data.uid);
 
                   initMessage();
+                  initUserInfo();
 
                   router.push('/campus');
                 } else {
@@ -261,7 +273,10 @@ export default {
                   // 设置 token 和 uid 以及 username
                   // globalStore.setToken(res.data.data.token);
                   // globalStore.setUid(res.data.data.uid);
-                  // globalStore.setUsername(res.data.data.uid);
+
+                  // initMessage();
+                  // initUserInfo();
+
                   router.push('/campus');
                 } else {
                   ElMessage({

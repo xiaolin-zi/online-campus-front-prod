@@ -1,26 +1,22 @@
 <template>
   <!-- 页面头部组件， -->
   <div class="headerContain">
-   
-        <!-- 搜索栏 -->
-          <van-search
-            v-model="value"
-            shape="round"
-            placeholder="Search menu,restaurant or etc"
-            show-action
-            autofocus
-            @search="onSearch"
-          >
-          <template #action>
-            <div @click="onClickButton">|&nbsp&nbsp搜索</div>
-          </template>
-
-          </van-search>
+    <!-- 搜索栏 -->
+    <van-search
+      v-model="value"
+      shape="round"
+      placeholder="Search menu,restaurant or etc"
+      show-action
+      autofocus
+      @search="onSearch">
+      <template #action>
+        <div @click="onClickButton">|&nbsp&nbsp搜索</div>
+      </template>
+    </van-search>
   </div>
+</template>
   
-  </template>
-  
-  <script setup lang="ts">
+<script setup lang="ts">
 //   import {ref} from 'vue'
 //   import { useRouter,useRoute } from 'vue-router'
 //   import { RouterLink } from 'vue-router';
@@ -46,18 +42,19 @@
 
 //     const router = useRouter()
 //     const onClickTab = ({ name }) =>router.push(name)  
-    // }
+// }
 
-    import { ref } from 'vue';
-    import { showToast } from 'vant';
+import { ref } from 'vue';
+import { showToast } from 'vant';
 
-    const value = ref('');
-    const onSearch = (val:string) => showToast(val);
-    const onClickButton = () => showToast(value.value);
-  </script>
+const value = ref('');
+const onSearch = (val:string) => showToast(val);
+const onClickButton = () => showToast(value.value);
+
+</script>
   
-  <style lang="less">
-  .headerContain{
+<style lang="less">
+  .headerContain {
     display: flex;
     justify-content: center;
     //吸顶定位
@@ -80,9 +77,5 @@
     }
 
   }
-
-    
-  
-  
-  </style>
+</style>
   
