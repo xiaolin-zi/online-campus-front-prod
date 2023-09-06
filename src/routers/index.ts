@@ -88,25 +88,25 @@ const router = createRouter({
       name: '线上校园-注册',
       component:  () => import('@/views/register/index.vue'),
     },
-    { 
+    {
       path: '/getAccount',
       name: '线上校园-忘记1',
       component: () => import('@/views/forget/getAccount.vue'),
     },
-    { 
-      path: '/verifyPhone', 
+    {
+      path: '/verifyPhone',
       name:'线上校园-手机验证',
-      component: () => import('@/views/forget/verifyPhone.vue') 
+      component: () => import('@/views/forget/verifyPhone.vue')
     },
-    { 
-      path: '/verifyEmail', 
-      name:'线上校园-邮箱验证', 
-      component: () => import('@/views/forget/verifyEmail.vue') 
+    {
+      path: '/verifyEmail',
+      name:'线上校园-邮箱验证',
+      component: () => import('@/views/forget/verifyEmail.vue')
     },
-    { 
-      path: '/forget', 
-      name:'线上校园-忘记2', 
-      component: () => import('@/views/forget/forget.vue') 
+    {
+      path: '/forget',
+      name:'线上校园-忘记2',
+      component: () => import('@/views/forget/forget.vue')
     },
     {
       path:'/campus/dashboard/post',
@@ -133,7 +133,7 @@ const router = createRouter({
       name:'线上校园-用户-账号与安全',
       component:() => import('@/views/user/account/index.vue')
     }
-   
+
   ],
 });
 
