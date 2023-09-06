@@ -122,7 +122,7 @@
 
 <script>
 import { reactive, ref } from 'vue';
-import router from '@/router';
+import router from '@/routers';
 import CryptoJS from 'crypto-js';
 import { getEmailCodeApi, checkEmailCodeApi, updatePasswordApi } from "@/apis/user/forget";
 import { ElMessage } from "element-plus";

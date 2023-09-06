@@ -20,7 +20,7 @@
 
 <script>
 import { reactive, ref } from 'vue';
-import router from '@/router';
+import router from '@/routers';
 import { getUserInfoByAccountApi } from '@/apis/user/forget';
 import { ElMessage } from "element-plus";
 import CryptoJS from 'crypto-js';

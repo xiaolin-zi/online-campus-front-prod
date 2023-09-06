@@ -1,7 +1,7 @@
 import { storeToRefs } from 'pinia';
 import { useGlobalStore } from '@/stores/useGlobalStore';
 import { AxiosError, AxiosResponse } from 'axios';
-import router from '@/router';
+import router from '@/routers';
 import { showToast } from 'vant';
 
 export const reqSuccessCallback = (config: any) => {
@@ -17,7 +17,7 @@ export const reqSuccessCallback = (config: any) => {
     globalStore.$reset();
     router.push('/login');
   }
-  
+
   return config;
 }
 

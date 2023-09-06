@@ -7,7 +7,7 @@ import 'element-plus/dist/index.css';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import 'font-awesome/css/font-awesome.min.css';
 import stores from '@/stores/index';
-import router from '@/router';
+import router from '@/routers';
 import App from '@/App.vue';
 
 // 导入全局css

@@ -19,7 +19,7 @@
         <div class="box-top">
             <van-uploader :after-read="afterRead" >
                 <div class="user-avatar">
-                    <img src="../../assets/img/avatar1.jpg" alt="">
+                    <img src="@/assets/img/avatar1.jpg" alt="">
                     <div class="icon-box">
                         <van-icon name="photograph" color="#ffff"
                         size="18px"/>
@@ -52,7 +52,7 @@ const onClickRight = () => showToast('保存');
 
 const afterRead = (file: any) => {
   // 此时可以自行将文件上传至服务器
-  console.log(file.file.name); 
+  console.log(file.file.name);
 };
 
 const userdata = reactive<any>({})
@@ -60,7 +60,7 @@ const userCard = ref<any>([])
 const getUser = async() => {
   const { data: res } = await getDetailApi();
   userdata.value = res;
-  userCard.value = res.data.data 
+  userCard.value = res.data.data
    console.log(userCard.value)
 }
 onMounted(getUser)
@@ -112,7 +112,7 @@ onMounted(getUser)
         --van-cell-font-size:16px;
         --van-cell-line-height:30px;
 
-       } 
+       }
     }
 }
 </style>
