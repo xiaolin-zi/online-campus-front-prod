@@ -18,12 +18,12 @@
     </van-tabs>
   </div>
 
-  <Main/>
+  <PostBubble/>
 </template>
   
 <script setup lang="ts">
 import Header from "@/components/HomeComponents/Header.vue";
-import Main from '@/components/HomeComponents/Main.vue';
+import PostBubble from '@/components/post-bubble/index.vue';
 import Banner from '@/components/HomeComponents/Banner.vue';
 import { ref, reactive } from 'vue';
 
@@ -31,7 +31,7 @@ const tabList = reactive([
   { title: '交易', name: 'trade', toPath: '/campus/dashboard/deal' },
   { title: '兼职', name: 'parttime', toPath: '/campus/dashboard/adjunct' }
 ]);
-const activeTab = ref('trade');
+const activeTab = ref(0);
 
 </script>
   

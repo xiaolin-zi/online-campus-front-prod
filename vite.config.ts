@@ -22,7 +22,7 @@ export default defineConfig({
   server: {
     port: 8192,
     cors: true, // 允许跨域
-    // open: true, // 项目启动时自动打开浏览器
+    open: true, // 项目启动时自动打开浏览器
 
     // 后端部署完成后的接口
     proxy: {

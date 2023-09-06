@@ -1,6 +1,7 @@
 import { userRequest, gatewayRequest } from '@/utils/request';
 
-export const getDetailApi = () =>{
+// 获取用户详细信息
+export const getDetailApi = () => {
   return userRequest({
     method:'get',
     url:'/user/getDetail'

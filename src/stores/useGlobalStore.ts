@@ -4,10 +4,13 @@ import { defineStore } from 'pinia';
 export const useGlobalStore = defineStore('globalState', {
   state: () => {
     return {
-      token: '',
-      uid: '',
-      username: '',
-      userImg: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+      userinfo: {
+        uid: '', // user id
+        username: '', // 用户名
+        userImage: '', // 头像
+        consignee: '', // 昵称
+      },
+      token: '', // 令牌
     }
   },
   getters: {},
@@ -15,12 +18,9 @@ export const useGlobalStore = defineStore('globalState', {
     setToken(token: string) {
       this.token = token;
     },
-    setUid(uid: string) {
-      this.uid = uid;
-    },
-    setUsername(username: string) {
-      this.username = username;
-    },
+    setUserInfo(userinfo: any) {
+      this.userinfo = userinfo;
+    }
   },
   persist: {
     enabled: true,
@@ -31,14 +31,9 @@ export const useGlobalStore = defineStore('globalState', {
         paths: ['token']
       },
       {
-        key: 'uid',
+        key: 'userinfo',
         storage: window.localStorage,
-        paths: ['uid']
-      },
-      {
-        key: 'username',
-        storage: window.localStorage,
-        paths: ['username']
+        paths: ['userinfo']
       }
     ]
   }

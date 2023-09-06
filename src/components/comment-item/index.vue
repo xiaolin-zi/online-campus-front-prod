@@ -66,7 +66,7 @@ import { showConfirmDialog, showToast } from 'vant';
 import { sendCommentApi } from '@/apis/contact/dynamic';
 import { storeToRefs } from 'pinia';
 import { useGlobalStore } from '@/stores/useGlobalStore';
-const { uid, username } = storeToRefs(useGlobalStore()); // 获取当前username和uid
+const { userinfo } = storeToRefs(useGlobalStore()); // 获取当前username和uid
 
 const props = defineProps<{ 
   item: Comment, 
@@ -105,7 +105,7 @@ onMounted(() => {
 
   // 根据用户展示删除按钮
   // console.log(comment.sender, uid.value);
-  if (comment.sender === uid.value) showDeleteBtn.value = true;
+  if (comment.sender === userinfo.value.uid) showDeleteBtn.value = true;
 });
 
 // 处理回复
@@ -118,8 +118,8 @@ const handleReply = (dId: string, receiverId: string, recevierName: string) => {
   showConfirmDialog({ title: '提示', message: '确认发送回复?' }).then(async () => {
     let addCommentForm = {
       dynamicId: dId,
-      senderId: uid.value,
-      senderName: username.value,
+      senderId: userinfo.value.uid,
+      senderName: userinfo.value.uid,
       receiverId: receiverId,
       receiverName: recevierName,
       content: replyContent.value

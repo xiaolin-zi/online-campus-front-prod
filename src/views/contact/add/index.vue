@@ -87,9 +87,10 @@ export default {
     const locationMsg = ref('所在位置');
     const statusMsg = ref('动态阅读权限');
 
-    const { uid, username } = storeToRefs(useGlobalStore());
-    dynamic.promulgatorId = uid.value;
-    dynamic.promulgatorName = username.value;
+    const { userinfo } = storeToRefs(useGlobalStore());
+    dynamic.promulgatorId = userinfo.value.uid;
+    dynamic.promulgatorName = userinfo.value.username;
+    dynamic.promulgatorImage = userinfo.value.userImage;
 
     
     const beforeRead = (file: File | any) => {

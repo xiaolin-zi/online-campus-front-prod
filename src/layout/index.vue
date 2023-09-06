@@ -22,7 +22,7 @@
 import { ref, reactive, onMounted } from 'vue';
 
 const active = ref(0);
-onMounted(() => { active.value = 0; });
+// onMounted(() => { active.value = 0; });
 
 const tabbarItemList = reactive([
   { toPath: '/campus/dashboard', iconName: 'wap-home-o', title: '首页' },

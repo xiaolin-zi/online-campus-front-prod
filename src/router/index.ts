@@ -27,12 +27,12 @@ const router = createRouter({
             {
               path:'/campus/dashboard/deal',
               name:'线上校园-首页-交易',
-              component:() => import('@/views/dashboard/Deal.vue')
+              component:() => import('@/views/dashboard/deal-view/index.vue')
             },
             {
               path:'/campus/dashboard/adjunct',
               name:'线上校园-首页-兼职',
-              component:() => import('@/views/dashboard/Adjunct.vue')
+              component:() => import('@/views/dashboard/adjunct-view/index.vue')
             }
           ]
         },
@@ -90,7 +90,7 @@ const router = createRouter({
     },
     { 
       path: '/getAccount',
-      name: '线上校园-忘记1',
+      name: '线上校园-找回账号',
       component: () => import('@/views/forget/getAccount.vue'),
     },
     { 
@@ -105,13 +105,13 @@ const router = createRouter({
     },
     { 
       path: '/forget', 
-      name:'线上校园-忘记2', 
+      name:'线上校园-忘记', 
       component: () => import('@/views/forget/forget.vue') 
     },
     {
       path:'/campus/dashboard/post',
       name:'线上校园-首页-发布',
-      component:() => import('@/views/dashboard/Post.vue')
+      component:() => import('@/views/dashboard/post/index.vue')
     },
     {
       path:'/campus/user/detail',
@@ -137,13 +137,32 @@ const router = createRouter({
   ],
 });
 
+// 路由白名单
+const whiteList = [
+  '/login',
+  '/register',
+  '/getAccount',
+  '/verifyPhone',
+  '/verifyEmail',
+  '/forget'
+];
+
 router.beforeEach((to, from, next) => {
   const globalStore = useGlobalStore();
   let token = globalStore.token.trim();
 
   console.log('router beforeEach', from.path, to.path,);
 
-  if (to.path === '/login' || to.path === '/register') {
+  let flag = true;
+
+  for (let i in whiteList) {
+    if (to.path === whiteList[i]) {
+      flag = false;
+      break;
+    }
+  }
+
+  if (!flag) {
     closeWebSocket();
     next();
   } else {
