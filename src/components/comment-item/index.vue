@@ -2,7 +2,7 @@
   <div class="comment-item-box">
     <div class="main-box">
       <div class="left-box">
-        <van-image :src="avatar2" round class="avatar"/>
+        <van-image :src="item.senderImage" round class="avatar"/>
       </div>
       <div class="right-box">
         <div class="user">

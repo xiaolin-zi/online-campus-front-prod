@@ -2,7 +2,7 @@
 <div class="user-box">
   <div class="box-top">
     <div class="user-avatar">
-        <img src="../../assets/img/avatar1.jpg" alt="">
+        <img :src="userCard.userImage" alt="">
     </div>
     <div class="user-name">
       <h3>{{ userCard.consignee }}</h3>
@@ -20,19 +20,20 @@
         <span><van-icon name="gold-coin-o" size="25" /><p>充值</p></span>
     </div>
 
-  <div class="box-orders">
-    <div class="orders-top">
+  <div class="box-orders1">
+    <div class="orders-top1">
       <p>{{ contentText }}</p>
-      <button @click="buttonContent"><van-icon name="exchange" size="20"/>{{ buttonText }}</button>
+      <button @click="buttonContentToggle"><van-icon name="exchange" size="20"/>{{ buttonText }}</button>
     </div>
     
     <!-- 我的兼职 -->
     <div v-if="isBottom1Visible" class="orders-bottom orders-bottom1">
-      <span>15<br><p>我的发布</p></span>
+      <span @click="() => { router.push('/campus/user/my-parttime/posted'); }">15<br><p>我的发布</p></span>
       <span>18<br><p>我的申请</p></span>
       <span>8<br><p>执行中</p></span>
       <span>5<p>已完成</p></span>
     </div>
+
     <!-- 我的交易，页面刷新默认显示我的交易-->
     <div v-else class="orders-bottom orders-bottom2">
       <span>18<br><p>我的发布</p></span>
@@ -45,7 +46,7 @@
   <div class="box-function">
     <span><van-icon name="clock-o" size="20"/><br><p>浏览历史</p></span>
     <span><van-icon name="notes-o"  size="20"/><br><p>我的帖子</p></span>
-    <span><van-icon name="like-o" size="20"/><br><p>收藏夹</p></span>
+    <span><van-icon name="like-o" size="20" @click="toCollect"/><br><p>收藏夹</p></span>
     <RouterLink to="user/detail">
       <span><van-icon name="envelop-o" size="20"/><p>个人资料</p></span>
     </RouterLink>
@@ -70,11 +71,14 @@ const globalStore = useGlobalStore();
 const router = useRouter();
 
 //我的交易和我的兼职切换逻辑
-const contentText = ref('我的交易')
-const buttonText = ref('我的兼职')
-const buttonStatus = ref(false)
-const isBottom1Visible = ref(false)
-const buttonContent = () => {
+const contentText = ref('我的交易');
+const buttonText = ref('我的兼职');
+const outsideClass = ref('box-orders2');
+const insideClass = ref('orders-top2');
+
+const buttonStatus = ref(false);
+const isBottom1Visible = ref(false);
+const buttonContentToggle = () => {
   //控制页面是否渲染，不能仅仅更换内容因为后期点击后跳转的是不同的页面
   isBottom1Visible.value = !isBottom1Visible.value
 
@@ -119,6 +123,11 @@ const handleLogout = () => {
     } else showToast('OOPS! 内部小错误,请稍后重试!');
 
   }).catch(() => showToast('已取消操作'));
+}
+
+const toCollect = () => {
+  const uid = globalStore.userinfo.uid;
+  router.push(`/campus/user/collect/${uid}`);
 }
 
 </script>
@@ -168,7 +177,7 @@ const handleLogout = () => {
     }
   }
   
-  .box-balance{
+  .box-balance {
     
     display: flex;
     height: 60px;
@@ -184,15 +193,15 @@ const handleLogout = () => {
       }
     } 
   }
-  .box-orders{
+  .box-orders1 {
     height: 100px;
     background-color: white;
     margin: 0 20px 15px;
-    border: 1px solid #abdfac;
+    border: 1px solid rgba(208, 190, 165, 0.8);
     border-radius: 10px;
-    background-color:#f6fcf6;
+    background-color: rgb(251, 247, 235);
     overflow: auto;
-    .orders-top{
+    .orders-top1 {
       display: flex;
       height: 35%;
       padding:0 10px;
@@ -206,14 +215,47 @@ const handleLogout = () => {
         font-size: 12px;
         width: 100px;
         height: 25px;
-        background-color: #abdfac;
+        background-color: rgba(208, 190, 165);
         border: none;
         border-radius: 20px;
         justify-content: space-evenly;
         align-items: center;
       }
     }
-    .orders-bottom{
+
+    .box-orders2 {
+      height: 100px;
+      background-color: white;
+      margin: 0 20px 15px;
+      border: 1px solid #abdfac;
+      border-radius: 10px;
+      background-color:#f6fcf6;
+      overflow: auto;
+      .orders-top2 {
+        display: flex;
+        height: 35%;
+        padding:0 10px;
+        justify-content:space-between;
+        align-items: center;
+        p{
+          font-weight: 700;
+        }
+        button{
+          display: flex;
+          font-size: 12px;
+          width: 100px;
+          height: 25px;
+          background-color: #abdfac;
+          border: none;
+          border-radius: 20px;
+          justify-content: space-evenly;
+          align-items: center;
+        }
+      }
+    }
+
+
+    .orders-bottom {
       display: flex;
       height: 60%;
       // padding: 0 10px 10px 10px;
@@ -229,7 +271,7 @@ const handleLogout = () => {
     }
   }
   
-  .box-function{
+  .box-function {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -246,7 +288,7 @@ const handleLogout = () => {
     }
   }
 
-  .box-buttons{
+  .box-buttons {
     --van-cell-line-height:36px;
     display: flex;
     flex-wrap: wrap;

@@ -7,7 +7,7 @@
       <template #right>
         <van-icon name="search" size="25" color="#0a1629" @click="toSearch"/>
         &nbsp;&nbsp;&nbsp;
-        <van-icon name="bell" size="25" color="#0a1629" :dot="true" @click="toSys"/>
+        <van-icon name="bell" size="25" color="#0a1629" :dot="true" @click="toInteractive"/>
         <van-image round class="avatar"
           fit="cover"
           :src="userinfo.userImage"
@@ -22,7 +22,7 @@
 
       <dynamicItem
         v-for="item in contactList.values" 
-        v-bind:key="item._id" 
+        :key="item._id" 
         :item="item"
         @on-comment="showSheetFn"
         @on-like="insertLike"
@@ -40,7 +40,7 @@
         <div class="sheet-main">
           <commentItem
             v-for="item in commentList.values"
-            v-bind:key="item.uuid" 
+            :key="item.uuid" 
             :item="item"
             :dynamic="targetDynamic.value"
             @on-delete="handleCommentDelete"
@@ -61,7 +61,6 @@ import dynamicItem from '@/components/dynamic-item/index.vue';
 import commentItem from '@/components/comment-item/index.vue';
 import { searchDynamicApi, insertLikeApi, deleteLikeApi, sendCommentApi, deleteCommentApi } from '@/apis/contact/dynamic';
 import { storeToRefs } from 'pinia';
-import avatar2 from '@/assets/img/avatar2.jpg';
 import { showConfirmDialog, showToast } from 'vant';
 import { reactive, ref, onMounted, toRaw, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
@@ -136,6 +135,7 @@ const sendComment = () => {
       dynamicId: _id,
       senderId: userinfo.value.uid,
       senderName: userinfo.value.username,
+      senderImage: userinfo.value.userImage,
       content: commentContent.value
     };
     // console.log('直接评论', addCommentForm);
@@ -202,8 +202,8 @@ const toAdd = () => {
   router.push('/campus/contact/add');
 }
 
-const toSys = () => {
-  router.push('/campus/message/sys');
+const toInteractive = () => {
+  router.push('/campus/contact/interactive');
 }
 
 const toMyDetail = () => {
