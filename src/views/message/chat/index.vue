@@ -1,23 +1,17 @@
 <template>
   <div class="messages">
 
-    <van-nav-bar class="header-box">
+    <goBackBar :title-text="user.username" @handle-left="() => { router.push('/campus/message'); }"/>
+
+    <!-- <van-nav-bar class="header-box">
       <template #left>
         <van-icon name="arrow-left" size="18" color="#0a1629" @click="() => { router.push('/campus/message'); }"/>
       </template>
       <template #title>
         <p class="title">{{ user.username }}</p>
       </template>
-    </van-nav-bar>
+    </van-nav-bar> -->
 
-    <!-- <header class="message-title">
-      <div class="head-left">
-      <el-icon @click="goBack" class="arrow-icon"><ArrowLeft /></el-icon> 
-    </div>
-    <div class="head-center">   
-      <p>{{ user.username }}</p>
-    </div>
-    </header> -->
     <div class="message-box-wrapper" ref="messageBox">
       <div class="message-box">
         <div v-for="(item, index) in chatList" :key="index">
@@ -70,6 +64,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import goBackBar from '@/components/go-back-bar/index.vue';
+
 import { User, ChatList } from '@/interfaces/message';
 import { ref, onMounted, computed, onUnmounted, onUpdated, reactive } from 'vue';
 import appData from '@/utils/emojis.json';
@@ -218,21 +214,22 @@ const errCallback = (data: any) => {
   box-sizing: border-box;
   overflow: hidden;
   height: 100%;
-  .header-box {
-    width: 100%;
-    z-index: 100;
-    overflow: hidden;
-    top: 0;
-    position: fixed;
-    height: 50px;
-    background: #f6f6f6;
-    .title {
-      color: #0a1629;
-      line-height: 50px;
-      text-align: center;
-      font-size: 22px;
-    }
-  }
+  // .header-box {
+  //   width: 100%;
+  //   z-index: 100;
+  //   overflow: hidden;
+  //   top: 0;
+  //   position: fixed;
+  //   height: 50px;
+  //   background: #f6f6f6;
+  //   .title {
+  //     color: #0a1629;
+  //     line-height: 50px;
+  //     text-align: center;
+  //     font-size: 22px;
+  //   }
+  // }
+  
   .message-box-wrapper {
     margin-top: 50px;
     height: 60vh;

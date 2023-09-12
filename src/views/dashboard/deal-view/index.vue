@@ -1,6 +1,6 @@
 <template>
   <div class="deal-view-box">
-    <div class="row" v-for="item in dealCardList" :key="item.productId">
+    <div class="row" v-for="item in dealCardList.values" :key="item.productId">
       <div class="deal-card" v-for="i in 2">
         <div class="card-img">
           <img :src="item.images[0]" alt="">
@@ -15,7 +15,7 @@
 
     <van-loading size="24px" v-if="isLoading" class="loading-box" text-size="20px">Loading...</van-loading>
     <van-empty image="network" description="网络出错啦!" v-show="isNetworkError && !isLoading"/>
-    <van-empty description="一片空白......" v-show="dealCardList.length === 0 && isLoading === false"/>
+    <van-empty description="一片空白......" v-show="dealCardList.values.length === 0 && isLoading === false"/>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ import { ref, reactive, onMounted } from 'vue'
 import { Product } from '@/interfaces/trade';
 import { getTradeApi } from '@/apis/trade/index';
 
-const dealCardList = reactive<Array<Product>>([]);
+const dealCardList = reactive<any>([]);
 const isLoading = ref(true);
 const isNetworkError = ref(false);
 

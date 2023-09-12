@@ -3,10 +3,13 @@
     <van-search
       v-model="inputValue"
       show-action
-      placeholder="搜索用户名..."
+      placeholder="搜索新好友..."
       @search="onSearch"
       @cancel="onCancel">
     </van-search>
+    <div class="main-box">
+
+    </div>
   </div>
 </template>
 
