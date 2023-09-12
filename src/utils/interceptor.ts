@@ -1,7 +1,7 @@
 import { storeToRefs } from 'pinia';
 import { useGlobalStore } from '@/stores/useGlobalStore';
 import { AxiosError, AxiosResponse } from 'axios';
-import router from '@/routers';
+import router from '@/router';
 import { showToast } from 'vant';
 
 export const reqSuccessCallback = (config: any) => {

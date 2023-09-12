@@ -113,7 +113,7 @@ import { reactive, ref } from 'vue';
 import { loginApi, loginByPhoneApi, sendPhoneCodeApi } from '@/apis/user/login';
 import { getDetailApi } from '@/apis/user/index';
 import { ElMessage, FormInstance } from 'element-plus'
-import router from '@/routers';
+import router from '@/router';
 import { initMessageApi } from '@/apis/message/index';
 import { useGlobalStore } from '@/stores/useGlobalStore';
 
