@@ -6,7 +6,7 @@ import { parttimeRequest } from '@/utils/request';
 export const addJob = (data: SendData) => {
   return parttimeRequest({
     method: 'post',
-    url: '/campusParttime/parttime/addJob',
+    url: '/parttime/addJob',
     data
   })
 }
@@ -15,7 +15,7 @@ export const addJob = (data: SendData) => {
 export const updateJobInfo = (data: editData) => {
   return parttimeRequest({
     method: 'post',
-    url: '/campusParttime/parttime/updateJobInfo',
+    url: '/parttime/updateJobInfo',
     data
   })
 }
@@ -23,7 +23,7 @@ export const updateJobInfo = (data: editData) => {
 export const forceUpdateJobInfo = (data: editData) => {
   return parttimeRequest({
     method: 'post',
-    url: '/campusParttime/parttime/forceUpdateJobInfo',
+    url: '/parttime/forceUpdateJobInfo',
     data
   })
 }
@@ -31,7 +31,7 @@ export const forceUpdateJobInfo = (data: editData) => {
 export const passApply = (applicationId: any) => {
   return parttimeRequest<any, any>({
     method: 'post',
-    url: '/campusParttime/parttime/passApply',
+    url: '/parttime/passApply',
     params: { applicationId },
   })
 }
@@ -39,7 +39,7 @@ export const passApply = (applicationId: any) => {
 export const rejectApply = (applicationId: any) => {
   return parttimeRequest<any, any>({
     method: 'post',
-    url: '/campusParttime/parttime/rejectApply',
+    url: '/parttime/rejectApply',
     params: { applicationId },
   })
 }
@@ -47,7 +47,7 @@ export const rejectApply = (applicationId: any) => {
 export const deleteJob = (jobId: any) => {
   return parttimeRequest<any, aPDetailResponseData>({
     method: 'get',
-    url: '/campusParttime/parttime/deleteJob',
+    url: '/parttime/deleteJob',
     params: { jobId },
   })
 }
@@ -55,7 +55,7 @@ export const deleteJob = (jobId: any) => {
 export const addVisitNum = (jobId: any) => {
   return parttimeRequest<any, aPDetailResponseData>({
     method: 'get',
-    url: '/campusParttime/parttime/addVisitNum',
+    url: '/parttime/addVisitNum',
     params: { jobId },
   })
 }
@@ -63,7 +63,7 @@ export const addVisitNum = (jobId: any) => {
 export const getJobDetail = (jobId: any) => {
   return parttimeRequest<any, aPDetailResponseData>({
     method: 'get',
-    url: '/campusParttime/parttime/getJobDetail',
+    url: '/parttime/getJobDetail',
     params: { jobId },
   })
 }
@@ -71,16 +71,16 @@ export const getJobDetail = (jobId: any) => {
 export const getApplyDetail = (applicationId: any) => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/getApplyDetail',
+    url: '/parttime/getApplyDetail',
     params: { applicationId },
   })
 }
-//export const getJobDetail = (jobId:any) =>parttimeRequest.get<any,aPDetailResponseData>('/campusParttime/parttime/getJobDetail'+jobId) 
+//export const getJobDetail = (jobId:any) =>parttimeRequest.get<any,aPDetailResponseData>('/parttime/getJobDetail'+jobId) 
 // 消息初始化
 export const lazyLoading = (num: any) => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/lazyLoading',
+    url: '/parttime/lazyLoading',
     params: { num },
   })
 }
@@ -88,7 +88,7 @@ export const lazyLoading = (num: any) => {
 export const searchApplyList = (jobId: any) => {
   return parttimeRequest<any, aPListResponseData>({
     method: 'get',
-    url: '/campusParttime/parttime/searchApplyListToPublisher',
+    url: '/parttime/searchApplyListToPublisher',
     params: { jobId },
   })
 }
@@ -96,7 +96,7 @@ export const searchApplyList = (jobId: any) => {
 export const deleteApply = (applicationId: any) => {
   return parttimeRequest<any, aPListResponseData>({
     method: 'get',
-    url: '/campusParttime/parttime/deleteApply',
+    url: '/parttime/deleteApply',
     params: { applicationId },
   })
 }
@@ -104,7 +104,7 @@ export const deleteApply = (applicationId: any) => {
 export const addJobApply = (jobId: any, jobVersion: any) => {
   return parttimeRequest({
     method: 'post',
-    url: '/campusParttime/parttime/addJobApply',
+    url: '/parttime/addJobApply',
     params: { jobId, jobVersion },
   })
 }
@@ -112,7 +112,7 @@ export const addJobApply = (jobId: any, jobVersion: any) => {
 export const cancelJobOperation = (jobId: any, jobVersion: any) => {
   return parttimeRequest({
     method: 'post',
-    url: '/campusParttime/parttime/cancelJobOperation',
+    url: '/parttime/cancelJobOperation',
     params: { jobId, jobVersion },
   })
 }
@@ -120,7 +120,7 @@ export const cancelJobOperation = (jobId: any, jobVersion: any) => {
 export const FavoritesJob = (jobId: any) => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/FavoritesJob',
+    url: '/parttime/FavoritesJob',
     params: { jobId },
   })
 }
@@ -128,7 +128,7 @@ export const FavoritesJob = (jobId: any) => {
 export const cancelFavoritesJob = (jobId: any) => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/cancelFavoritesJob',
+    url: '/parttime/cancelFavoritesJob',
     params: { jobId },
   })
 }
@@ -136,7 +136,7 @@ export const cancelFavoritesJob = (jobId: any) => {
 export const likeJob = (jobId: any) => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/likeJob',
+    url: '/parttime/likeJob',
     params: { jobId },
   })
 }
@@ -144,7 +144,7 @@ export const likeJob = (jobId: any) => {
 export const cancelLikeJob = (jobId: any) => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/cancelLikeJob',
+    url: '/parttime/cancelLikeJob',
     params: { jobId },
   })
 }
@@ -152,21 +152,21 @@ export const cancelLikeJob = (jobId: any) => {
 export const searchMyAppliedList = () => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/searchMyAppliedList'
+    url: '/parttime/searchMyAppliedList'
   })
 }
 //查看已发布列表
 export const searchMyPublishedList = () => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/searchMyPublishedList',
+    url: '/parttime/searchMyPublishedList',
   })
 }
 //查看进行中列表
 export const searchMyActiveList = () => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/searchMyActiveList',
+    url: '/parttime/searchMyActiveList',
 
   })
 }
@@ -174,14 +174,14 @@ export const searchMyActiveList = () => {
 export const searchMyFinishedList = () => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/searchMyFinishedList',
+    url: '/parttime/searchMyFinishedList',
   })
 }
 //查看收藏列表
 export const searchFavoritesList = (userId: any) => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/searchFavoritesList',
+    url: '/parttime/searchFavoritesList',
     params: { userId },
   })
 }
@@ -189,7 +189,7 @@ export const searchFavoritesList = (userId: any) => {
 export const getOperationDetail = (operationId: any) => {
   return parttimeRequest({
     method: 'get',
-    url: '/campusParttime/parttime/getOperationDetail',
+    url: '/parttime/getOperationDetail',
     params: { operationId },
   })
 }
@@ -197,7 +197,7 @@ export const getOperationDetail = (operationId: any) => {
 export const updateOperationStatus = (data: operationData) => {
   return parttimeRequest({
     method: 'post',
-    url: '/campusParttime/parttime/updateOperationStatus',
+    url: '/parttime/updateOperationStatus',
     data
   })
 }
