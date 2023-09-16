@@ -39,27 +39,51 @@
             <van-icon name="good-job-o" v-else/>
             {{ item.likeId.length }}
           </li>
-          <li @click="handleMore"><van-icon name="ellipsis"/></li>
+          <li>
+            <van-popover v-model:show="showPopover" :actions="actions" @select="onActionSelect">
+              <template #reference>
+                <van-icon name="ellipsis"/>
+              </template>
+            </van-popover>
+          </li>
         </ul>
       </div>
     </div>
+
   </div>
 </template>
 
 <script setup lang="ts">
-import avatar2 from '@/assets/img/avatar2.jpg';
 import { useGlobalStore } from '@/stores/useGlobalStore';
 
 import { showImagePreview, showToast } from 'vant';
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, onUpdated } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { Dynamic } from '@/interfaces/contact';
 
 const props = defineProps<{ item: Dynamic }>();
-const emit = defineEmits(['on-like', 'on-dislike', 'on-comment']);
+const emit = defineEmits(['on-like', 'on-dislike', 'on-comment', 'on-share']);
 const { userinfo } = storeToRefs(useGlobalStore());
+const router = useRouter();
 const likeIcon = ref(false);
+
+const showPopover = ref(false);
+const actions = ref([
+  { text: '动态详情', icon: 'more-o' },
+  { text: '分享动态', icon: 'share-o' },
+  { text: '举报动态', icon: 'bulb-o' },
+]);
+
+const onActionSelect = (action: any) => {
+  let text = action.text;
+  if (text === '动态详情') router.push(`/campus/contact/dynamic-detail/${props.item._id}`);
+  else if (text === '分享动态') emit('on-share', 'a link');
+  else showToast(action.text);
+  
+  showPopover.value = false;
+}
 
 // 点赞图标切换
 const likeIconToggle = () => {
@@ -85,10 +109,6 @@ const handleComment = (item: any) => {
 const handleLikeOrDislike = (item: any) => {
   if (likeIcon.value === true) emit('on-dislike', item._id);
   else emit('on-like', item._id);
-}
-
-const handleMore = () => {
-
 }
 
 // 生命周期相关

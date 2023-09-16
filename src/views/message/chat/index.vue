@@ -3,15 +3,6 @@
 
     <goBackBar :title-text="user.username" @handle-left="() => { router.push('/campus/message'); }"/>
 
-    <!-- <van-nav-bar class="header-box">
-      <template #left>
-        <van-icon name="arrow-left" size="18" color="#0a1629" @click="() => { router.push('/campus/message'); }"/>
-      </template>
-      <template #title>
-        <p class="title">{{ user.username }}</p>
-      </template>
-    </van-nav-bar> -->
-
     <div class="message-box-wrapper" ref="messageBox">
       <div class="message-box">
         <div v-for="(item, index) in chatList" :key="index">
@@ -73,7 +64,7 @@ import { storeToRefs } from 'pinia';
 import { useRoute ,useRouter } from 'vue-router';
 import { getUserChatRecords, clickMyMessageApi } from '@/apis/message/index';
 import { useGlobalStore } from '@/stores/useGlobalStore';
-import { wsSendMsg } from '@/utils/websocket';
+import { wsSendMsg, listenMsg } from '@/utils/websocket';
 import { showToast } from 'vant';
 
 const route = useRoute();
@@ -111,6 +102,7 @@ onMounted(() => {
 
 onUpdated(() => {
   scrollToBottom();
+  listenMsg(listenCallback);
 });
 
 const scrollToBottom = () => {
@@ -132,8 +124,9 @@ const getData = async () => {
 const goBack= () => {     
   router.go(-1); // 使用Vue Router的go方法返回上一个页面
 };
+
 const getEmo = (index: number) => {
-  var textArea: any = document.getElementById("textarea");
+  var textArea: any = document.getElementById('textarea');
   function changeSelectedText(obj: any, str: any) {
     if (window.getSelection()) {
       textArea.setRangeText(str);
@@ -150,7 +143,7 @@ const getEmo = (index: number) => {
 
 // 选择图片并上传
 const chooseImage = () => {
-  const fileInput = document.getElementById("file-input");
+  const fileInput = document.getElementById('file-input');
 
   if (fileInput) {
     fileInput.click();
@@ -164,11 +157,11 @@ const fileChange = (e: any) => {
 };
 
 onMounted(() => {
-  window.addEventListener("keydown", keyDown);
+  window.addEventListener('keydown', keyDown);
 });
 
 onUnmounted(() => {
-  window.removeEventListener("keydown", keyDown, false);
+  window.removeEventListener('keydown', keyDown, false);
 });
 
 const keyDown = (e: any) => {
@@ -191,13 +184,21 @@ const send = async () => {
 };
 
 const successCallback = (data: any) => {
-  console.log(data, 'successCallback');
+  // console.log(data, 'successCallback');
+  chatList.value.push(data);
+  // console.log(chatList.value);
+}
+
+// 实时获取最新消息
+const listenCallback = (data: any) => {
+  // console.log(data, 'listenCallback');
+  // showToast(data.content);
   chatList.value.push(data);
 }
 
-const errCallback = (data: any) => {
-  console.log(data, 'errCallback');
-}
+// const errCallback = (data: any) => {
+//   console.log(data, 'errCallback');
+// }
 
 </script>
 

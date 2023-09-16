@@ -110,10 +110,11 @@ const handleLogout = () => {
     title: '提示',
     message: '确认退出登录?'
   }).then(async () => {
-    const { data: res } = await logoutApi();
+    const { data: res } = await clearMessageCacheApi();
+    console.log('clearMessageCache', res);
     if (res.code === 0) {
       // 先清除消息缓存然后再清理token
-      const { data: res2 } = await clearMessageCacheApi();
+      const { data: res2 } = await logoutApi();
       
       if (res2.code === 0) {
         globalStore.$reset();

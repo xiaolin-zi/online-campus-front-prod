@@ -15,23 +15,16 @@
             stretch>
           <el-tab-pane label="密码登录" name="first">
             <div class="loginInput">
-              <el-form ref="loginForm" :model="login" label-width="80px">
-                <el-form-item
-                  prop="loginName"
-                  :rules="[{ required: true, message: '请输入手机号/邮箱/账号', trigger: 'blur' }]">
-                <el-input
-                  v-model="login.loginName"
-                  placeholder="请输入手机号/邮箱/账号"></el-input>
+              <el-form 
+                ref="loginForm" 
+                :model="login" 
+                :rules="loginFormRules"
+                label-width="80px">
+                <el-form-item prop="loginName">
+                  <el-input v-model="login.loginName" placeholder="请输入手机号/邮箱/账号" />
                 </el-form-item>
-                <el-form-item
-                    prop="password"
-                    :rules="[{ required: true, message: '请输入密码', trigger: 'blur' }]"
-                >
-                  <el-input
-                      v-model="login.password"
-                      type="password"
-                      placeholder="请输入密码"
-                  ></el-input>
+                <el-form-item prop="password">
+                  <el-input v-model="login.password" type="password" placeholder="请输入密码" />
                 </el-form-item>
                 <el-form-item>
                   <el-button type="primary" @click="tologin">
@@ -108,211 +101,184 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import { loginApi, loginByPhoneApi, sendPhoneCodeApi } from '@/apis/user/login';
 import { getDetailApi } from '@/apis/user/index';
-import { ElMessage, FormInstance } from 'element-plus'
+import type { FormInstance, FormRules } from 'element-plus';
+import { ElMessage } from 'element-plus';
 import router from '@/router';
 import { initMessageApi } from '@/apis/message/index';
 import { useGlobalStore } from '@/stores/useGlobalStore';
+import { showNotify } from 'vant';
 
 const globalStore = useGlobalStore();
 
-export default {
+// export default {
 
-  setup() {
-    const loginForm = ref<FormInstance>();
-    const loginByPhoneForm = ref<FormInstance>();
-    const loginLoading = ref(false);
-    const login = reactive({
-      loginName: "",
-      password: "",
-    });
-    const loginByPhone = reactive({ telephone: "", code: "" });
-    const activeName = ref("first");
-    const countDownSecond = ref(60);
-    const isCountDownShow = ref(false);
+//   setup() {
+const loginForm = ref<FormInstance>(); // 登录表单
+const loginByPhoneForm = ref<FormInstance>(); // 通过手机号登录的表单
 
-    const checkPhone = (rule: any, value: any, callback: any) => {
-      //debugger
-      if (!/^1[34578]\d{9}$/.test(value)) {
-        return callback(new Error("手机号码格式不正确"));
-      }
-      return callback();
-    };
+// 登录表单的校验规则
+const loginFormRules = reactive<FormRules>({
+  loginName: [{ required: true, message: '请输入手机号/邮箱/账号', trigger: 'blur' }],
+  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+});
 
-    // 倒计时名称
-    let timer: any;
 
-    const initMessage = async () => {
-      const { data: res } = await initMessageApi();
-      console.log('Login Success!, Now initMessage: ', res);
-    }
+const loginLoading = ref(false);
+const login = reactive({
+  loginName: '',
+  password: '',
+});
+const loginByPhone = reactive({ telephone: '', code: ''});
+const activeName = ref('first');
+const countDownSecond = ref(60);
+const isCountDownShow = ref(false);
 
-    const initUserInfo = async () => {
-      const { data: res } = await getDetailApi();
-      let userinfo = {
-        uid: res.data.userId,
-        username: res.data.username,
-        userImage: res.data.userImage,
-        consignee: res.data.consignee,
-      };
-      console.log('Login Success!, Now initUserInfo: ', userinfo);
-      globalStore.setUserInfo(userinfo);
-    }
-
-    //登录
-    const tologin = async () => {
-      loginForm.value.validate(
-          (valid: any) => {
-            if (valid) {
-              loginLoading.value = true;
-              loginApi(login).then((res) => {
-                if (res.data.code == 0) {
-                  console.log("登录成功");
-                  console.log(res.data.data);
-
-                  ElMessage({
-                    message: '登录成功',
-                    type: 'success',
-                  });
-
-                  // 设置 token 和 uid 以及 username
-                  globalStore.setToken(res.data.data.token);
-
-                  initMessage();
-                  initUserInfo();
-
-                  router.push('/campus');
-                } else {
-                  console.log("登录失败");
-                  console.log(res.data.msg);
-                  ElMessage({
-                    message: '手机号或验证码错误',
-                    type: 'error',
-                  });
-                }
-                loginLoading.value = false;
-              }).catch((err) => {
-                console.log(err);
-                ElMessage({
-                  message: '服务器网络出现问题，请稍后重试',
-                  type: 'error',
-                });
-                loginLoading.value = false;
-              })
-            }
-          }
-      );
-    };
-
-    const handleClick = (e: any) => {
-      console.log(e.name);
-    };
-
-    const getCode = async () => {
-      //先判断手机号是否正确
-      loginByPhoneForm.value.validateField("telephone", (valid: any) => {
-        if (!valid) {
-          return;
-        } else {
-          isCountDownShow.value = true;
-          sendPhoneCodeApi(loginByPhone.telephone).then((res) => {
-            startCountDown();
-            if (res.data.code == 0) {
-              ElMessage({
-                message: '验证码已发送',
-                type: 'success',
-              })
-            } else {
-              ElMessage({
-                message: '验证码发送失败',
-                type: 'error',
-              })
-            }
-          }).catch((err) => {
-            console.log(err);
-            ElMessage({
-              message: '服务器网络出现问题，请稍后重试',
-              type: 'error',
-            })
-          })
-        }
-      });
-
-    };
-
-    const startCountDown = () => {
-      countDownSecond.value = 60;
-      timer = setInterval(() => {
-        countDownSecond.value--;
-        if (countDownSecond.value == 0) {
-          clearInterval(timer);
-          isCountDownShow.value = false;
-        }
-      }, 1000);
-    };
-
-    const tologinByPhone = async () => {
-      loginByPhoneForm.value.validate(
-          (valid: any) => {
-            if (valid) {
-              loginByPhoneApi(loginByPhone).then((res) => {
-                console.log(res)
-                if (res.data.code == 0) {
-          +        //登录成功
-                  console.log("登录成功");
-                  console.log(res.data.data);
-
-                  ElMessage({
-                    message: '登录成功',
-                    type: 'success',
-                  });
-
-                  // 设置 token 和 uid 以及 username
-                  // globalStore.setToken(res.data.data.token);
-                  // globalStore.setUid(res.data.data.uid);
-
-                  // initMessage();
-                  // initUserInfo();
-
-                  router.push('/campus');
-                } else {
-                  ElMessage({
-                    message: '手机号或验证码错误',
-                    type: 'error',
-                  })
-                }
-              }).catch(() => {
-                ElMessage({
-                  message: '服务器网络出现问题，请稍后重试',
-                  type: 'error',
-                })
-              })
-            }
-          }
-      )
-    }
-
-    return {
-      loginForm,
-      loginByPhoneForm,
-      login,
-      loginLoading,
-      loginByPhone,
-      isCountDownShow,
-      countDownSecond,
-      activeName,
-      checkPhone,
-      tologin,
-      handleClick,
-      getCode,
-      tologinByPhone
-    };
+const checkPhone = (rule: any, value: any, callback: any) => {
+  //debugger
+  if (!/^1[34578]\d{9}$/.test(value)) {
+    return callback(new Error("手机号码格式不正确"));
   }
+  return callback();
+};
+
+// 倒计时名称
+let timer: any;
+
+const initMessage = async () => {
+  const { data: res } = await initMessageApi();
+  console.log('Login Success!, Now initMessage: ', res);
 }
 
+const initUserInfo = async () => {
+  const { data: res } = await getDetailApi();
+  let userinfo = {
+    uid: res.data.userId,
+    username: res.data.username,
+    userImage: res.data.userImage,
+    consignee: res.data.consignee,
+  };
+  console.log('Login Success!, Now initUserInfo: ', userinfo);
+  globalStore.setUserInfo(userinfo);
+}
+
+    //登录
+const tologin = async () => {
+  loginForm.value?.validate((valid: any) => {
+    if (valid) {
+      loginLoading.value = true;
+      loginApi(login).then((res) => {
+        if (res.data.code === 0) {
+          console.log("登录成功");
+          console.log(res.data.data);
+
+          showNotify({ type: 'success', message: '登录成功' });
+
+          // 设置 token
+          globalStore.setToken(res.data.data.token);
+          initMessage();
+          initUserInfo();
+
+          router.push('/campus');
+        } else {
+          console.log("登录失败");
+          console.log(res.data.msg);
+          showNotify({ type: 'danger', message: '手机号或验证码错误' });
+        }
+        loginLoading.value = false;
+      }).catch((err) => {
+        console.log(err);
+        showNotify({ type: 'danger', message: '服务器网络出现问题，请稍后重试' });
+        loginLoading.value = false;
+      })
+    }
+  });
+}
+
+const handleClick = (e: any) => {
+  console.log(e.name);
+};
+
+const getCode = async () => {
+  //先判断手机号是否正确
+  loginByPhoneForm.value?.validateField("telephone", (valid: any) => {
+    if (!valid) {
+      return;
+    } else {
+      isCountDownShow.value = true;
+      sendPhoneCodeApi(loginByPhone.telephone).then((res) => {
+        startCountDown();
+        if (res.data.code == 0) {
+          showNotify({ type: 'success',  message: '验证码已发送' });
+        } else {
+          showNotify({ type: 'danger',  message: '验证码发送失败' });
+        }
+      }).catch((err) => {
+        console.log(err);
+        showNotify({ type: 'danger',  message: '服务器网络出现问题，请稍后重试' });
+      })
+    }
+  });
+}
+
+const startCountDown = () => {
+  countDownSecond.value = 60;
+  timer = setInterval(() => {
+    countDownSecond.value--;
+    if (countDownSecond.value == 0) {
+      clearInterval(timer);
+      isCountDownShow.value = false;
+    }
+  }, 1000);
+};
+
+const tologinByPhone = async () => {
+  loginByPhoneForm.value?.validate((valid: any) => {
+    if (valid) {
+      loginByPhoneApi(loginByPhone).then((res) => {
+        console.log(res)
+        if (res.data.code == 0) {
+          //登录成功
+          console.log("登录成功");
+          console.log(res.data.data);
+          showNotify({ type: 'success',  message: '登录成功' });
+
+          // 设置 token 和 uid 以及 username
+          // globalStore.setToken(res.data.data.token);
+          // initMessage();
+          // initUserInfo();
+
+          router.push('/campus');
+        } else {
+          showNotify({ type: 'danger',  message: '手机号或验证码错误' });
+        }
+      }).catch((err) => {
+        showNotify({ type: 'danger',  message: '服务器网络出现问题，请稍后重试' });
+      });
+    }
+  });
+}
+
+    // return {
+    //   loginForm,
+    //   loginByPhoneForm,
+    //   login,
+    //   loginLoading,
+    //   loginByPhone,
+    //   isCountDownShow,
+    //   countDownSecond,
+    //   activeName,
+    //   checkPhone,
+    //   tologin,
+    //   handleClick,
+    //   getCode,
+    //   tologinByPhone
+    // };
+//   }
+// }
 </script>
 
 <style scoped>
