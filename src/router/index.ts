@@ -24,16 +24,16 @@ const router = createRouter({
           redirect: '/campus/dashboard/deal',
           name: '线上校园-总首页',
           component: () => import('@/views/dashboard/index.vue'),
-          children:[
+          children: [
             {
-              path:'/campus/dashboard/deal',
-              name:'线上校园-首页-交易',
-              component:() => import('@/views/dashboard/deal-view/index.vue')
+              path: '/campus/dashboard/deal',
+              name: '线上校园-首页-交易',
+              component: () => import('@/views/dashboard/deal-view/index.vue')
             },
             {
-              path:'/campus/dashboard/adjunct',
-              name:'线上校园-首页-兼职',
-              component:() => import('@/views/dashboard/adjunct-view/index.vue')
+              path: '/campus/dashboard/adjunct',
+              name: '线上校园-首页-兼职',
+              component: () => import('@/views/dashboard/adjunct-view/index.vue')
             }
           ]
         },
@@ -77,69 +77,83 @@ const router = createRouter({
     {
       path: '/login',
       name: '线上校园-登录',
-      component:  () => import('@/views/login/index.vue'),
+      component: () => import('@/views/login/index.vue'),
     },
     {
       path: '/register',
       name: '线上校园-注册',
-      component:  () => import('@/views/register/index.vue'),
+      component: () => import('@/views/register/index.vue'),
     },
-    { 
+    {
       path: '/getAccount',
       name: '线上校园-找回账号',
       component: () => import('@/views/forget/getAccount.vue'),
     },
-    { 
-      path: '/verifyPhone', 
-      name:'线上校园-手机验证',
-      component: () => import('@/views/forget/verifyPhone.vue') 
-    },
-    { 
-      path: '/verifyEmail', 
-      name:'线上校园-邮箱验证', 
-      component: () => import('@/views/forget/verifyEmail.vue') 
-    },
-    { 
-      path: '/forget', 
-      name:'线上校园-忘记', 
-      component: () => import('@/views/forget/forget.vue') 
+    {
+      path: '/verifyPhone',
+      name: '线上校园-手机验证',
+      component: () => import('@/views/forget/verifyPhone.vue')
     },
     {
-      path:'/campus/dashboard/post',
-      name:'线上校园-首页-发布',
-      component:() => import('@/views/dashboard/post/index.vue')
+      path: '/verifyEmail',
+      name: '线上校园-邮箱验证',
+      component: () => import('@/views/forget/verifyEmail.vue')
     },
     {
-      path:'/campus/user/detail',
-      name:'线上校园-用户-个人资料',
-      component:() => import('@/views/user/detail/index.vue'),
+      path: '/forget',
+      name: '线上校园-忘记',
+      component: () => import('@/views/forget/forget.vue')
     },
     {
-      path:'/campus/user/collect/:id',
-      name:'线上校园-用户-收藏夹',
-      component:() => import('@/views/user/collect/index.vue'),
+      path: '/campus/dashboard/post',
+      name: '线上校园-首页-发布',
+      component: () => import('@/views/dashboard/post/index.vue')
     },
     {
-      path:'/campus/user/detail/myname',
-      name:'线上校园-用户-个人资料-修改名字',
-      component:() => import('@/views/user/edit-detail/my-name/index.vue')
+      path: '/campus/user/detail',
+      name: '线上校园-用户-个人资料',
+      component: () => import('@/views/user/detail/index.vue'),
     },
     {
-      path:'/campus/user/balance',
-      name:'线上校园-用户-余额与明细',
-      component:() => import('@/views/user/balance/index.vue')
+      path: '/campus/user/collect/:id',
+      name: '线上校园-用户-收藏夹',
+      component: () => import('@/views/user/collect/index.vue'),
     },
     {
-      path:'/campus/user/account',
-      name:'线上校园-用户-账号与安全',
-      component:() => import('@/views/user/account/index.vue')
+      path: '/campus/user/detail/myname',
+      name: '线上校园-用户-个人资料-修改名字',
+      component: () => import('@/views/user/edit-detail/my-name/index.vue')
     },
     {
-      path:'/campus/user/my-parttime/posted',
-      name:'线上校园-用户-我的兼职-我的发布',
-      component:() => import('@/views/user/my-parttime/posted/index.vue')
+      path: '/campus/user/balance',
+      name: '线上校园-用户-余额与明细',
+      component: () => import('@/views/user/balance/index.vue')
     },
-
+    {
+      path: '/campus/user/account',
+      name: '线上校园-用户-账号与安全',
+      component: () => import('@/views/user/account/index.vue')
+    },
+    {
+      path: '/campus/user/my-parttime/posted',
+      name: '线上校园-用户-我的兼职-我的发布',
+      component: () => import('@/views/user/my-parttime/posted/index.vue')
+    },
+    {
+      path: '/campus/user/my-parttime/MyApplied',
+      name: '线上校园-用户-我的兼职-我的申请',
+      component: () => import('@/views/user/my-parttime/MyApplied.vue')
+    },
+    {
+      path: '/campus/user/my-parttime/ApplyDetail/:id',
+      name: '线上校园-用户-我的兼职-申请详情',
+      component: () => import('@/views/user/my-parttime/ApplyDetail.vue')
+    },
+    {
+      path: '/campus/user/my-parttime/procedDetail/:id',
+      name: '线上校园-用户-我的兼职-进行中详情',
+      component: () => import('@/views/user/my-parttime/procedDetail.vue')
+    },
     {
       path: '/campus/contact/interactive',
       name: '线上校园-交际-互动',
@@ -152,21 +166,41 @@ const router = createRouter({
     },
 
     {
-      path:'/campus/parttime/postAdjunct',
-      name:'线上校园-兼职-发布兼职',
-      component:() => import('@/views/parttime/post/index.vue')
+      path: '/campus/parttime/postAdjunct',
+      name: '线上校园-兼职-发布兼职',
+      component: () => import('@/views/parttime/post/index.vue')
     },
     {
-      path:'/campus/parttime/detail/:id',
-      name:'线上校园-兼职-兼职详情',
-      component:() => import('@/views/parttime/detail/index.vue')
+      path: '/campus/parttime/detail/:id',
+      name: '线上校园-兼职-兼职详情',
+      component: () => import('@/views/parttime/detail/index.vue')
+    },
+
+    {
+      path: '/campus/parttime/ApList/:id',
+      name: '线上校园-兼职-查看兼职申请人列表',
+      component: () => import('@/views/parttime/edit/index.vue')
     },
     {
-      path:'/campus/parttime/edit/:id',
-      name:'线上校园-兼职-兼职资料修改',
-      component:() => import('@/views/parttime/edit/index.vue')
+      path: '/Delete',
+      name: '线上校园-兼职-删除成功',
+      component: () => import('@/views/parttime/Success/Delete.vue')
     },
-   
+    {
+      path: '/Finish',
+      name: '线上校园-兼职-添加完成成功',
+      component: () => import('@/views/parttime/Success/Finish.vue')
+    },
+    {
+      path: '/Reject',
+      name: '线上校园-兼职-已经拒绝申请成功',
+      component: () => import('@/views/parttime/Success/Reject.vue')
+    },
+    {
+      path: '/Pass',
+      name: '线上校园-兼职-通过申请成功',
+      component: () => import('@/views/parttime/Success/Pass.vue')
+    },
   ],
 });
 
