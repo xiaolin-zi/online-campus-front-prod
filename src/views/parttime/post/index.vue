@@ -79,12 +79,12 @@
 import { onMounted, ref, reactive } from "vue";
 import type { FormInstance, FormRules } from 'element-plus';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { lazyLoading, addJob } from '../api/index'
+import { lazyLoading, addJob } from '@/apis/parttime/index'
 import { useRouter } from "vue-router";
-import type { SendData } from '../api/types';
-import { useStore } from '../store/modules/info'
-const store = useStore()
-const { userinfo } = store.$state
+import type { SendData } from '@/interfaces/parttime';
+//import { useStore } from '../store/modules/info'
+//const store = useStore()
+//const { userinfo } = store.$state
 //const publisherId=userinfo.token
 const router = useRouter();
 //const radio3 = ref('1')

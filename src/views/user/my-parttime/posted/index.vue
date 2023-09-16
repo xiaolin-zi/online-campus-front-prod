@@ -1,32 +1,12 @@
 <template>
   <div id="headersArea" class=" headersArea">
     <goBackBar title-text="我的发布" @handle-left="() => { router.go(-1); }" />
-    <!-- <div id="query" class="query">
-        <header class="message-title">
-          <div class="head-left">
-            <el-icon class="arrow-icon" @click="goBack">
-              <ArrowLeft />
-            </el-icon>
-          </div>
-          <div class="head-center">
-            <p>申请详情</p>
-          </div>
-        </header>
-      </div> -->
-
-
     <div class="navbar">
       <div v-for="(item, index) in navItems" :key="index" :class="{ 'active': selectedIndex === index }"
         @click="selectPage(index)">
         {{ item }}
       </div>
     </div>
-
-
-
-
-
-
     <div class="main-body">
       <div v-if="selectedIndex === 0" class="body">
         <div class="adjunct-card" v-for="item in MyPublishedList.values" v-bind:key="item.jobTitle"
@@ -151,7 +131,7 @@ const getStatusText = (status: number) => {
 // const FinishedList = reactive<FinishedListRecords>([]);
 const FinishedList = reactive<any>([]);
 const toPage = (id: string) => {
-  router.push("/procedDetail/" + id);
+  router.push("/campus/user/my-parttime/procedDetail/" + id);
 };
 const getDataFinish = async () => {
   let result = await searchMyFinishedList();
@@ -161,7 +141,7 @@ const getDataFinish = async () => {
   //console.log(result[0])
 }
 const toPageD = (id: string) => {
-  router.push("/apDetail/" + id);
+  router.push("/campus/parttime/detail/" + id);
 };
 // const MyPublishedList = reactive<myPostListRecords>([]);
 const MyPublishedList = reactive<any>([]);

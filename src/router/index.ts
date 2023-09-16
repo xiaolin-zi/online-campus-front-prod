@@ -146,7 +146,7 @@ const router = createRouter({
     },
     {
       path: '/campus/user/my-parttime/ApplyDetail/:id',
-      name: '线上校园-用户-我的兼职-申请详情',
+      name: '线上校园-用户-我的兼职-我的申请-申请详情',
       component: () => import('@/views/user/my-parttime/ApplyDetail.vue')
     },
     {

@@ -116,11 +116,6 @@ const getDataActive = async () => {
     ActiveList.values = result.data.data;
     //console.log(result[0])
 }
-/* const goBack = () => {
-    router.go(-1);
-    // 使用Vue Router的go方法返回上一个页面
-}; */
-
 
 const getStatusText = (status: number) => {
     if (status === 0) {
@@ -154,7 +149,7 @@ const getDataFinish = async () => {
     //console.log(result[0])
 }
 const toPageD = (id: string) => {
-    router.push("/ApplyDetail/" + id);
+    router.push("/campus/user/my-parttime/ApplyDetail/" + id);
 };
 
 const Applied = reactive<AppliedListRecords>([]);
