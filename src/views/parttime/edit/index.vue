@@ -98,7 +98,7 @@ let aPDetail = ref<aPDetailData>({});
 const router = useRouter();
 const dialogVisible = ref(false)
 const getData = async () => {
-  let result: aPDetailResponseData = await getJobDetailApi(jobId);
+  let result: aPDetailResponseData | any = await getJobDetailApi(jobId);
   console.log(result);
   aPDetail.value = result.data.data;
 }

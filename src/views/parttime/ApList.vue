@@ -39,7 +39,7 @@ const router = useRouter();
 const route = useRoute()
 //const router = useRouter();
 const jobId: any = route.params.id
-const aPList = reactive<aPListRecords>([]);
+const aPList = reactive<aPListRecords|any>([]);
 
 const myButtonA = ref<HTMLButtonElement | null>(null);
 const buttonTextA: Ref<string[]> = ref([]);
@@ -72,7 +72,7 @@ const getStatusTextB = (status: number) => {
   }
 } */
 const getapData = async () => {
-  let result: aPListResponseData = await searchApplyList((jobId));
+  let result: aPListResponseData | any = await searchApplyList((jobId));
   console.log(jobId)
   //console.log(result.data)
   //console.log(result.data.data)

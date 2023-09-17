@@ -17,7 +17,10 @@ export interface SendData {
 export interface aPDetailData {
   applyStatus?: number,
   applicationId?: string,
-  userImage?: https://edu20230513.oss-cn-guangzhou.aliyuncs.com/2023/07/25/338d98830092451bbd00ee2af233289b.png,
+  userImage?: {
+    type: string 
+    default: 'https://edu20230513.oss-cn-guangzhou.aliyuncs.com/2023/07/25/338d98830092451bbd00ee2af233289b.png'
+  },
   username?: string,
   likeStatus?: number,
   credit?: number,

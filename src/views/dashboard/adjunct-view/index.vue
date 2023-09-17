@@ -21,7 +21,7 @@
 </template>
 <script setup lang="ts">
 import { onMounted, ref, reactive } from "vue";
-import { lazyLoading } from '@/apis/parttime/index'
+import { lazyLoadingApi } from '@/apis/parttime/index'
 import { useRouter } from "vue-router";
 import type { lazyListRecords } from '@/interfaces/parttime';
 
@@ -37,10 +37,10 @@ const getStatusText = (status: number) => {
   }
 }
 const router = useRouter();
-const partTimeList = reactive<lazyListRecords>([]);
+const partTimeList = reactive<lazyListRecords|any>([]);
 const num = ref<number>(2);
 const getData = async () => {
-  let result = await lazyLoading(num.value)
+  let result = await lazyLoadingApi(num.value)
   partTimeList.values = result.data.data
   console.log(result.data.data)
 }

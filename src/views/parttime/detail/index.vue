@@ -112,10 +112,10 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRouter, useRoute } from 'vue-router'
 import {
-    addJobApply, getJobDetail,
-    cancelLikeJob, FavoritesJob,
-    cancelFavoritesJob, likeJob,
-    deleteJob, addVisitNum, cancelJobOperation
+    addJobApplyApi, getJobDetailApi,
+    cancelLikeJobApi, FavoritesJobApi,
+    cancelFavoritesJobApi, likeJobApi,
+    deleteJobApi, addVisitNumApi, cancelJobOperationApi
 } from '@/apis/parttime/index';
 import type { aPDetailData, aPDetailResponseData } from '@/interfaces/parttime';
 import { ElMessage } from 'element-plus';
@@ -142,12 +142,12 @@ const numf = ref<number>();
 const likenum = ref<number>();
 const isApplied = ref<number>();
 const isAppliedstatus = ref<string>();
-const aPDetail = ref<aPDetailData>({});
+const aPDetail = ref<aPDetailData|any>({});
 const route = useRoute();
 const jobId: any = route.params.id;
 
 const getData = async () => {
-    const { data: res } = await getJobDetail(jobId);
+    const { data: res } = await getJobDetailApi(jobId);
     console.log('get Detail', res);
     aPDetail.value = res.data;
     alreadyCollected.value = aPDetail.value.favoritesStatus;
@@ -167,12 +167,12 @@ onMounted(() => {
     getData();
 })
 const getvisitData = async () => {
-    let { data: res } = await addVisitNum(jobId);
+    let { data: res } = await addVisitNumApi(jobId);
     console.log(`get visited Data ${jobId}`, res);
 }
 
 const getDatasecond = async () => {
-    const { data: res } = await getJobDetail(jobId);
+    const { data: res } = await getJobDetailApi(jobId);
     console.log('getDatasecond', res);
     aPDetail.value = res.data;
     alreadyCollected.value = aPDetail.value.favoritesStatus;
@@ -200,7 +200,7 @@ const goToEdit = (id: string) => {
 
 //删除
 const Delete = async () => {
-    const { data: res } = await deleteJob(jobId);
+    const { data: res } = await deleteJobApi(jobId);
     console.log(res);
     if (res.code === 0) {
         router.push("/delete");
@@ -222,7 +222,7 @@ const goToDelete = () => {
 const applyFn = async (jobId: string, jobVersion: number) => {
     //console.log(data)
     // 发送申请请求
-    let result = await addJobApply(jobId, jobVersion);
+    let result = await addJobApplyApi(jobId, jobVersion);
     console.log(result)
     if (result.data.code == 0) {
         getData();
@@ -251,7 +251,7 @@ const goBack = () => {
 };
 //* /添加收藏 
 const addFavorite = async () => {
-    const res = await FavoritesJob(aPDetail.value.jobId)
+    const res = await FavoritesJobApi(aPDetail.value.jobId)
     console.log(res)
     if (res.data.code == 0) {
         ElMessage({
@@ -266,7 +266,7 @@ const addFavorite = async () => {
     }
 }
 const addLike = async () => {
-    const res = await likeJob(aPDetail.value.jobId)
+    const res = await likeJobApi(aPDetail.value.jobId)
     console.log(res)
     if (res.data.code == 0) {
         ElMessage({
@@ -285,7 +285,7 @@ const addLike = async () => {
     }
 }
 const cancelFavorite = async () => {
-    const res = await cancelFavoritesJob(aPDetail.value.jobId)
+    const res = await cancelFavoritesJobApi(aPDetail.value.jobId)
     console.log(res)
     if (res.data.code == 0) {
         ElMessage({
@@ -300,7 +300,7 @@ const cancelFavorite = async () => {
     }
 }
 const cancelLike = async () => {
-    const res = await cancelLikeJob(aPDetail.value.jobId)
+    const res = await cancelLikeJobApi(aPDetail.value.jobId)
     console.log(res)
     if (res.data.code == 0) {
         ElMessage({

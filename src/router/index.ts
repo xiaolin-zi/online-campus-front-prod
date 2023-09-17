@@ -65,16 +65,6 @@ const router = createRouter({
       component: () => import('@/views/message/chat/index.vue'),
     },
     {
-      path: '/campus/contact/add',
-      name: '线上校园-交际-写动态',
-      component: () => import('@/views/contact/add/index.vue'),
-    },
-    {
-      path: '/campus/contact/search',
-      name: '线上校园-交际-搜索',
-      component: () => import('@/views/contact/search/index.vue')
-    },
-    {
       path: '/login',
       name: '线上校园-登录',
       component: () => import('@/views/login/index.vue'),
@@ -155,14 +145,41 @@ const router = createRouter({
       component: () => import('@/views/user/my-parttime/procedDetail.vue')
     },
     {
+      path: '/campus/contact/add',
+      name: '线上校园-交际-写动态',
+      component: () => import('@/views/contact/add/index.vue')
+    },
+    {
+      path: '/campus/contact/search',
+      name: '线上校园-交际-搜索',
+      component: () => import('@/views/contact/search/index.vue')
+    },
+    {
+      path: '/campus/contact/dynamic-detail/:id',
+      name: '线上校园-交际-搜索',
+      component: () => import('@/views/contact/dynamic-detail/index.vue')
+    },
+    {
       path: '/campus/contact/interactive',
       name: '线上校园-交际-互动',
-      component: () => import('@/views/contact/interactive/index.vue'),
+      component: () => import('@/views/contact/interactive/index.vue')
     },
+    {
+      path: '/campus/contact/interactive/like-receive',
+      name: '线上校园-交际-互动-收到的赞',
+      component: () => import('@/views/contact/interactive/like-receive/index.vue')
+    },
+    {
+      path: '/campus/contact/interactive/comment-receive',
+      name: '线上校园-交际-互动-收到的评论及回复',
+      component: () => import('@/views/contact/interactive/comment-receive/index.vue')
+    },
+
+
     {
       path: '/campus/message/sys',
       name: '线上校园-消息-系统通知',
-      component: () => import('@/views/message/sys/index.vue'),
+      component: () => import('@/views/message/sys/index.vue')
     },
 
     {
@@ -218,7 +235,7 @@ router.beforeEach((to, from, next) => {
   const globalStore = useGlobalStore();
   let token = globalStore.token.trim();
 
-  console.log('router beforeEach', from.path, to.path);
+  // console.log('router beforeEach', from.path, to.path);
 
   let flag = true;
 
@@ -234,12 +251,12 @@ router.beforeEach((to, from, next) => {
     next();
   } else {
     if (token !== '') {
-      console.log('尝试关闭原有ws');
+      // console.log('尝试关闭原有ws');
       closeWebSocket();
 
       console.log(`成功切换页面: '${from.path}' ---> '${to.path}'`);
 
-      console.log('尝试创建新ws');
+      // console.log('尝试创建新ws');
       openWebSocket(`wss://117.72.15.203/campusMessage/websocket/${globalStore.userinfo.uid}`);
       next();
     } else {

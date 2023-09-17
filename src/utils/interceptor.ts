@@ -4,10 +4,28 @@ import { AxiosError, AxiosResponse } from 'axios';
 import router from '@/router';
 import { showToast } from 'vant';
 
+const whiteList = [
+  'login',
+  'loginByCode',
+  'loginByPhone',
+  'send',
+  'sendEmail',
+  'logout',
+  'register'
+];
+
 export const reqSuccessCallback = (config: any) => {
   const globalStore = useGlobalStore();
   let token = globalStore.token, uid = globalStore.userinfo.uid;
-  // console.log('request interceptor', uid, token);
+  let arr = config.url.split('/');
+
+  for (let j in whiteList) {
+    if (whiteList[j] === arr[arr.length - 1]) {
+      return config;
+    }
+  }
+
+  // console.log('request interceptor', config, token, arr);
 
   if (token !== '') {
     config.headers.token = token;
