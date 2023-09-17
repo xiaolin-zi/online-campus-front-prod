@@ -91,7 +91,7 @@ import goBackBar from '@/components/go-back-bar/index.vue';
 // import { useGobalStore } from '@/stores/useGlobalStore';
 import { reactive, onMounted, ref } from "vue";
 import type { myPostListRecords, FinishedListRecords, activeListRecords } from '@/interfaces/parttime';
-import { searchMyActiveList, searchMyPublishedList, searchMyFinishedList } from '@/apis/parttime/index';
+import { searchMyActiveListApi, searchMyPublishedListApi, searchMyFinishedListApi } from '@/apis/parttime/index';
 import { useRouter } from "vue-router";
 const router = useRouter();
 const navItems = ref(['已发布', '进行中', '已完成', '已超时']);
@@ -103,7 +103,7 @@ const selectPage = (index: number) => {
 const ActiveList = reactive<any>([]);
 
 const getDataActive = async () => {
-  let result = await searchMyActiveList();
+  let result = await searchMyActiveListApi();
   //console.log(result.data.data)
   console.log(result)
   ActiveList.values = result.data.data;
@@ -134,7 +134,7 @@ const toPage = (id: string) => {
   router.push("/campus/user/my-parttime/procedDetail/" + id);
 };
 const getDataFinish = async () => {
-  let result = await searchMyFinishedList();
+  let result = await searchMyFinishedListApi();
   //console.log(result.data.data)
   console.log(result)
   FinishedList.values = result.data.data;
@@ -146,7 +146,7 @@ const toPageD = (id: string) => {
 // const MyPublishedList = reactive<myPostListRecords>([]);
 const MyPublishedList = reactive<any>([]);
 const getDataAll = async () => {
-  let result = await searchMyPublishedList();
+  let result = await searchMyPublishedListApi();
   //console.log(result.data.data)
   console.log(result)
   MyPublishedList.values = result.data.data;

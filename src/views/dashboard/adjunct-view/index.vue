@@ -1,22 +1,28 @@
 <template>
-  <div class="adjunct-card" v-for="item in partTimeList.values" v-bind:key="item.jobId" @click="toPage(item.jobId)">
-    <div class="card-left">
-      <div class="first">
-        <el-image :src="item.userImage" style="width: 38px; height: 38px; border-radius: 5px" />
+  <div class="adjunct-view-box">
+    <div class="adjunct-card" v-for="item in partTimeList.values" v-bind:key="item.jobId" @click="toPage(item.jobId)">
+      <div class="card-left">
+        <div class="first">
+          <el-image :src="item.userImage" style="width: 38px; height: 38px; border-radius: 5px" />
 
+        </div>
+        <div class="tag-container">
+          <div class="title">{{ item.jobTitle }}</div>
+          <span v-if="item.location === 0">佛山校区</span>
+          <span v-else="item.location===1">广州校区</span>
+        </div>
       </div>
-      <div class="tag-container">
-        <div class="title">{{ item.jobTitle }}</div>
-        <span v-if="item.location === 0">佛山校区</span>
-        <span v-else="item.location===1">广州校区</span>
+      <div class="card-right">
+        <div class="price">薪资：{{ item.salary }}</div>
+        <div class="company">
+          {{ getStatusText(item.status) }}
+        </div>
       </div>
     </div>
-    <div class="card-right">
-      <div class="price">薪资：{{ item.salary }}</div>
-      <div class="company">
-        {{ getStatusText(item.status) }}
-      </div>
-    </div>
+
+    <van-loading size="24px" v-if="isLoading" class="loading-box" text-size="20px">Loading...</van-loading>
+    <van-empty image="network" description="网络出错啦!" v-show="isNetworkError && !isLoading"/>
+    <van-empty description="一片空白......" v-show="partTimeList.values.length === 0 && isLoading === false"/>
   </div>
 </template>
 <script setup lang="ts">
@@ -24,6 +30,9 @@ import { onMounted, ref, reactive } from "vue";
 import { lazyLoadingApi } from '@/apis/parttime/index'
 import { useRouter } from "vue-router";
 import type { lazyListRecords } from '@/interfaces/parttime';
+
+const isLoading = ref(true);
+const isNetworkError = ref(false);
 
 const getStatusText = (status: number) => {
   if (status === 0) {
@@ -40,9 +49,19 @@ const router = useRouter();
 const partTimeList = reactive<lazyListRecords|any>([]);
 const num = ref<number>(2);
 const getData = async () => {
-  let result = await lazyLoadingApi(num.value)
-  partTimeList.values = result.data.data
-  console.log(result.data.data)
+  try {
+    const { data: res } = await lazyLoadingApi(num.value);
+    console.log('lazyLoadPartTimeList', res);
+    if (res.code === 0) {
+      partTimeList.values = res.data;
+      console.log(res.data);
+    }
+  } catch(err: any) {
+    console.log('Network Error: ', err);
+    isNetworkError.value = true;
+  } finally {
+    isLoading.value = false;
+  }
 }
 onMounted(() => {
   getData();
@@ -54,12 +73,15 @@ const toPage = (id: string) => {
 </script>
 
 <style scoped lang="less">
-body {
-  display: flex;
-  justify-content: center;
-  /* 水平居中 */
-  align-items: center;
-  /* 垂直居中 */
+.adjunct-view-box {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 100px;
+  
+  .loading-box {
+    color: #0a1629;
+    text-align: center;
+  }
 
   .adjunct-card {
     display: grid;

@@ -2,16 +2,20 @@
   <div class="comment-receive-box">
     <goBackBar title-text="收到的评论及回复" @handle-left="router.go(-1);"/>
     <div class="main-box">
-      <div class="dto-item" v-for="dtoItem in dtoList.values" :key="dtoItem.dtoId">
-        <div class="left">
-          <img :src="dtoItem.senderAvatar" class="avatar"/>
-          <p>用户<strong>&nbsp;{{ dtoItem.senderName }}&nbsp;</strong>回复了你的{{ dtoItem.dtoType === 1 ? '动态' : '评论' }}</p>
-          <div class="sub"><p>{{ dtoItem.content }}</p></div>
-        </div>
-        <div class="right">
-          <p>{{ dtoItem.targetContent }}</p>
+      <van-loading size="24px" v-if="isLoading" class="loading-box" text-size="20px">Loading...</van-loading>
+      <div class="list-box" v-else>
+        <div class="dto-item" v-for="dtoItem in dtoList.values" :key="dtoItem.dtoId">
+          <div class="left">
+            <img :src="dtoItem.senderAvatar" class="avatar"/>
+            <p>用户<strong>&nbsp;{{ dtoItem.senderName }}&nbsp;</strong>回复了你的{{ dtoItem.dtoType === 1 ? '动态' : '评论' }}</p>
+            <div class="sub"><p>{{ dtoItem.content }}</p></div>
+          </div>
+          <div class="right">
+            <p>{{ dtoItem.targetContent }}</p>
+          </div>
         </div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -20,7 +24,7 @@
 import { onMounted, ref, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { commentReceiveDto } from '@/interfaces/contact';
-// import { getUserInfoByUidApi } from '@/apis/user/index';
+import { getUserInfoByUidApi } from '@/apis/user/index';
 import goBackBar from '@/components/go-back-bar/index.vue';
 
 const route = useRoute();
@@ -32,6 +36,14 @@ onMounted(async () => {
   let list: any = route.query.list;
   list = JSON.parse(list);
   dtoList.values = list;
+
+  // for (let i in list) {
+  //   const { data: res } = await getUserInfoByUidApi(list[i].senderId);
+  //   // console.log('avatar res', res);
+  //   if (res.code === 0) {
+  //     dtoList.values[i].senderAvatar = res.data.userImage;
+  //   }
+  // }
 
   isLoading.value = false;
   // console.log('route', dtoList.values);

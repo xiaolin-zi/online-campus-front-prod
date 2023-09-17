@@ -155,8 +155,7 @@ export default {
     let timer: any;
 
     const toRegist = async () => {
-      registForm.value?.validate(
-          (valid: any) => {
+      registForm.value?.validate((valid: any) => {
             if (valid) {
               registerApi(regist).then((res) => {
                 if (res.data.code == 0) {

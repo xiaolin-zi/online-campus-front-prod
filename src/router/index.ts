@@ -132,7 +132,7 @@ const router = createRouter({
     {
       path: '/campus/user/my-parttime/MyApplied',
       name: '线上校园-用户-我的兼职-我的申请',
-      component: () => import('@/views/user/my-parttime/MyApplied.vue')
+      component: () => import('@/views/user/my-parttime/applied/index.vue')
     },
     {
       path: '/campus/user/my-parttime/ApplyDetail/:id',
@@ -156,7 +156,7 @@ const router = createRouter({
     },
     {
       path: '/campus/contact/dynamic-detail/:id',
-      name: '线上校园-交际-搜索',
+      name: '线上校园-交际-动态详情',
       component: () => import('@/views/contact/dynamic-detail/index.vue')
     },
     {
