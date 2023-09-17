@@ -59,7 +59,6 @@
 </template>
 
 <script setup lang="ts">
-import avatar2 from '@/assets/img/avatar2.jpg';
 import { ref, nextTick, toRaw, onMounted } from 'vue';
 import { Comment, Dynamic } from '@/interfaces/contact';
 import { showConfirmDialog, showToast } from 'vant';

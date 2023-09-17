@@ -165,7 +165,7 @@ const initUserInfo = async () => {
   globalStore.setUserInfo(userinfo);
 }
 
-    //登录
+//登录
 const tologin = async () => {
   loginForm.value?.validate((valid: any) => {
     if (valid) {
@@ -262,23 +262,6 @@ const tologinByPhone = async () => {
   });
 }
 
-    // return {
-    //   loginForm,
-    //   loginByPhoneForm,
-    //   login,
-    //   loginLoading,
-    //   loginByPhone,
-    //   isCountDownShow,
-    //   countDownSecond,
-    //   activeName,
-    //   checkPhone,
-    //   tologin,
-    //   handleClick,
-    //   getCode,
-    //   tologinByPhone
-    // };
-//   }
-// }
 </script>
 
 <style scoped>
