@@ -60,7 +60,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { getApplyDetail, deleteApply } from '@/apis/parttime/index'
+import { getApplyDetailApi, deleteApplyApi } from '@/apis/parttime/index'
 import type { AppliedDetailData } from '@/interfaces/parttime'
 import { ElMessage } from 'element-plus';
 import { useRoute, useRouter } from "vue-router";
@@ -70,7 +70,7 @@ const applicationId: any = route.params.id
 const Applied = ref<AppliedDetailData>({});
 
 const getData = async () => {
-    let result = await getApplyDetail((applicationId));
+    let result = await getApplyDetailApi((applicationId));
     //console.log(result.data.data)
     console.log(result)
     Applied.value = result.data.data;
@@ -81,7 +81,7 @@ const goDelete = () => {
 };
 
 const Delete = async () => {
-    let result = await deleteApply((applicationId));
+    let result = await deleteApplyApi((applicationId));
     //console.log(result.data.data)
     console.log(result)
     if (result.data.code == 0) {
