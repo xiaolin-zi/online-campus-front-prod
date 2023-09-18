@@ -65,3 +65,21 @@ export const deleteCommentApi = function(form: any) {
     data: form
   });
 }
+
+// 切换为同城
+export const searchCityWideApi = function(city: string) {
+  return contactRequest({
+    url: '/dynamic/searchCityWide',
+    method: 'get',
+    params: { city }
+  });
+}
+
+// 查看用户发过的动态
+export const searchOnesDynamicApi = function(uid: string) {
+  return contactRequest({
+    url: '/dynamic/searchOnesDynamic',
+    method: 'get',
+    params: { uid }
+  });
+}

@@ -44,6 +44,8 @@ const handleToPage = (userId: string) => {
 <style lang="less" scoped>
 .friend-item-box {
   width: 100%;
+  // border: 1px solid #f00;
+  margin-bottom: 10px;
   color: #0a1629;
   .main-box {
     display: flex;

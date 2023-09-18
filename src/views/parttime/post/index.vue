@@ -228,7 +228,7 @@ const goBack = () => {
   width: 100%;
   overflow: hidden;
   height: 50px;
-  background: #f6f6f6;
+  background: #fff;
   .title {
     color: #0a1629;
     font-family: '黑体';

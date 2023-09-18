@@ -25,7 +25,7 @@
           </div>
         </van-collapse-item>
         <van-collapse-item title="好友消息" name="friend">
-          <friendItem 
+          <friendItem
             v-for="(item, index) in userList" 
             :item="item" 
             :key="index" 

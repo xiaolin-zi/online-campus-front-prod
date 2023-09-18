@@ -116,15 +116,19 @@
 <script lang="ts">
 import { reactive, ref } from 'vue';
 import { sendPhoneCodeApi } from '@/apis/user/login';
-import { ElMessage } from 'element-plus';
+import { ElMessage, FormRules } from 'element-plus';
 import { registerApi } from '@/apis/user/register';
 import router from '@/router';
+import { FormInstance } from 'vant';
 
 export default {
 
   setup() {
 
-    const registForm = ref(null);
+    const registForm = ref<FormInstance>();
+    const registFormRules = reactive<FormRules>({
+      
+    });
 
     const regist = reactive({
       account: '',
@@ -151,8 +155,7 @@ export default {
     let timer: any;
 
     const toRegist = async () => {
-      registForm.value.validate(
-          (valid: any) => {
+      registForm.value?.validate((valid: any) => {
             if (valid) {
               registerApi(regist).then((res) => {
                 if (res.data.code == 0) {
@@ -206,8 +209,7 @@ export default {
 
     const getCode = async () => {
       //先判断手机号是否正确
-      //先判断手机号是否正确
-      registForm.value.validateField("telephone", (valid: any) => {
+      registForm.value?.validateField("telephone", (valid: any) => {
         console.log(valid);
         if (!valid) {
           return;
