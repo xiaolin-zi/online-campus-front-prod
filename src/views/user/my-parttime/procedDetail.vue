@@ -65,7 +65,7 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, reactive } from "vue";
-import { getOperationDetail, updateOperationStatus } from '@/apis/parttime/index'
+import { getOperationDetailApi, updateOperationStatusApi } from '@/apis/parttime/index'
 import type { ProcedingDetailData, operationData } from '@/interfaces/parttime'
 import { ElMessage } from 'element-plus';
 import { useRoute, useRouter } from "vue-router";
@@ -79,7 +79,7 @@ const operationList = reactive<operationData>({
     status: ProcedingDetail.value.status
 });
 const getData = async () => {
-    let result = await getOperationDetail((operationId));
+    let result = await getOperationDetailApi((operationId));
     //console.log(result.data.data)
     console.log(result)
     ProcedingDetail.value = result.data.data;
@@ -90,7 +90,7 @@ const goOperate = () => {
 };
 
 const Operate = async () => {
-    let result = await updateOperationStatus((operationList));
+    let result = await updateOperationStatusApi((operationList));
     //console.log(result.data.data)
     console.log(result)
     if (result.data.code == 0) {
