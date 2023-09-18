@@ -140,7 +140,7 @@ const handleLogout = () => {
   }).then(async () => {
     const { data: res } = await clearMessageCacheApi();
     console.log('clearMessageCache', res);
-    if (res.code === 0) {
+    if (res && res.code === 0) {
       // 先清除消息缓存然后再清理token
       const { data: res2 } = await logoutApi();
       
