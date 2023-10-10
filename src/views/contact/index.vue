@@ -139,8 +139,7 @@ const onOptionSelect = (option: any) => {
 
 onMounted(() => {
   // console.log('on Mounted.');
-  getAllContacts();
-  getAllCityContacts();
+  refreshFn();
   // contactIndexTitle.value = `${userinfo.value.username} 交际圈`;
 });
 
@@ -183,6 +182,11 @@ const getAllCityContacts = async() => {
   }
 }
 
+const refreshFn = () => {
+  getAllContacts();
+  getAllCityContacts();
+}
+
 // 展示评论区
 const showSheetFn = (item: Dynamic) => {
   let itemRaw = toRaw(item);
@@ -214,7 +218,7 @@ const sendComment = () => {
     // console.log('sendRes', sendRes);
     if (sendRes && sendRes.code === 0) {
       showToast('发送评论成功~');
-      getAllContacts();
+      refreshFn();
       showSheet.value = false;
     } else {
       showToast('OOPS! 内部小错误,请稍后重试!');
@@ -224,7 +228,7 @@ const sendComment = () => {
 }
 const handleReplyFinish = async () => {
   showSheet.value = false;
-  getAllContacts();
+  refreshFn();
 }
 
 // 点赞或取消点赞
@@ -233,7 +237,8 @@ const insertLike = async (dynamicId: string) => {
   const { data: res } = await insertLikeApi(dynamicId, userinfo.value.username);
   if (res && res.code === 0) {
     showToast('点赞成功~');
-    getAllContacts(); // 刷新
+    refreshFn(); // 刷新
+    
   } else {
     showToast('OOPS! 内部小错误,请稍后重试!');
   }
@@ -243,7 +248,7 @@ const cancelLike = async (dynamicId: string) => {
   const { data: res } = await deleteLikeApi(dynamicId, userinfo.value.username);
   if (res && res.code === 0) {
     showToast('已取消点赞~');
-    getAllContacts(); // 刷新
+    refreshFn(); // 刷新
   } else {
     showToast('OOPS! 内部小错误,请稍后重试!');
   }
@@ -255,7 +260,7 @@ const handleCommentDelete = (deleteCommentForm: any) => {
     const { data: res } = await deleteCommentApi(deleteCommentForm);
     if (res && res.code === 0) {
       showToast('删除成功~');
-      getAllContacts();
+      refreshFn();
       showSheet.value = false;
     } else {
       showToast('OOPS! 内部小错误,请稍后重试!');
