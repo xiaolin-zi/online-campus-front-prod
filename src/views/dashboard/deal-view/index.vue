@@ -11,7 +11,7 @@
           <div class="price">￥{{ item.price }}</div>
           <div>
             <img :src="item.userAvatar" alt="" style="vertical-align:middle;">
-            &nbsp;&nbsp;&nbsp;<span class="userName" style="width: 30px;text-align: center">{{item.userName}}</span>
+            &nbsp;<span class="userName" style="width: 30px;text-align: center">{{item.userName}}</span>
           </div>
 
         </div>
