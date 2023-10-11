@@ -89,7 +89,7 @@ onMounted(lazyLoadDealCardList);
     align-items: center;
     margin: 5px;
       .title {
-        font-size: 16px;
+        font-size: 14px;
         font-weight:700;
       }
       .features {
