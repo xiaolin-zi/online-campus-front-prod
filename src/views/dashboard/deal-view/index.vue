@@ -108,7 +108,7 @@ onMounted(lazyLoadDealCardList);
         font-weight:700;
         white-space: nowrap;
         overflow: hidden;
-        //text-overflow: ellipsis;
+        text-overflow: ellipsis;
       }
       .features {
         font-size:12px;
