@@ -55,7 +55,7 @@ onMounted(lazyLoadDealCardList);
 
 
 }
-.userAvatar img{
+.card-message img{
   width: 18px;
   height: 18px;
   border-radius: 10px;
