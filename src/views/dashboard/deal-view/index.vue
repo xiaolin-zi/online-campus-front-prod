@@ -6,8 +6,8 @@
           <img :src="item.images[0]" alt="">
         </div>
         <div class="card-message">
-          <div class="title">{{ item.categoryName }}</div>
-          <div class="features">{{ item.subCategoryName }}</div>
+          <div class="title">{{ item.description }}</div>
+          <div class="features">{{item.categoryName}} | {{item.subCategoryName }}</div>
           <div class="price">￥{{ item.price }}</div>
         </div>
       </div>
