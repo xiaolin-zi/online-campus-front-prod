@@ -9,7 +9,7 @@
           <div class="title">{{ item.description }}</div>
           <div class="features">{{item.categoryName}} | {{item.subCategoryName }}</div>
           <div class="price">￥{{ item.price }}</div>
-          <img :src="item.userAvatar" alt=""><span>{{item.username}}</span>
+          <img :src="item.userAvatar" alt=""><span>{{item.userName}}</span>
         </div>
 
       </div>
@@ -104,7 +104,7 @@ onMounted(lazyLoadDealCardList);
         font-weight:700;
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;
+        //text-overflow: ellipsis;
       }
       .features {
         font-size:12px;
