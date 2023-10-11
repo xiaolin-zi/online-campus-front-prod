@@ -9,7 +9,7 @@
           <div class="title">{{ item.description }}</div>
           <div class="features">{{item.categoryName}} | {{item.subCategoryName }}</div>
           <div class="price">￥{{ item.price }}</div>
-          <img :src="item.userAvatar" alt="">&nbsp;&nbsp; {item.userName}}
+          <img :src="item.userAvatar" alt="" style="display: inline-block"><span class="userName">{{item.userName}}</span>
         </div>
 
       </div>
@@ -52,7 +52,7 @@ onMounted(lazyLoadDealCardList);
 
 <style scoped lang="less">
 .userName{
-  width: 15px;
+
   font-size: 10px;
 }
 .card-message img{
