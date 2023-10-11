@@ -52,7 +52,7 @@ onMounted(lazyLoadDealCardList);
 
 <style scoped lang="less">
 .userName{
-
+  width: 50px;
   font-size: 10px;
 }
 .card-message img{
