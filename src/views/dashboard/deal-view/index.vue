@@ -9,7 +9,11 @@
           <div class="title">{{ item.description }}</div>
           <div class="features">{{item.categoryName}} | {{item.subCategoryName }}</div>
           <div class="price">￥{{ item.price }}</div>
-          <img :src="item.userAvatar" alt="" style="vertical-align:middle;"><span class="userName" style="width: 30px;float: right;">{{item.userName}}</span>
+          <div>
+            <span class="userName" style="width: 30px;float: right;">{{item.userName}}</span>
+            <img :src="item.userAvatar" alt="" style="vertical-align:middle;">
+          </div>
+
         </div>
 
       </div>
