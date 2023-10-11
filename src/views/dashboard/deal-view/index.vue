@@ -9,8 +9,9 @@
           <div class="title">{{ item.description }}</div>
           <div class="features">{{item.categoryName}} | {{item.subCategoryName }}</div>
           <div class="price">￥{{ item.price }}</div>
+          <img :src="item.userAvatar" alt=""><span>{{item.usrname}}</span>
         </div>
-        <span class="userAvatar"><img :src="item.userAvatar" alt=""></span>
+
       </div>
     </div>
 
@@ -55,8 +56,8 @@ onMounted(lazyLoadDealCardList);
 
 }
 .userAvatar img{
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   border-radius: 10px;
 }
 .deal-view-box {
@@ -77,7 +78,7 @@ onMounted(lazyLoadDealCardList);
   .deal-card {
     display: grid;;
     grid-template-rows: 3fr 2fr;
-    height: 200px;
+    height: 240px;
     width: 45%;
     border: 1px solid rgb(213, 213,213,0.3) ;
     border-radius:8px;
@@ -101,6 +102,9 @@ onMounted(lazyLoadDealCardList);
       .title {
         font-size: 14px;
         font-weight:700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .features {
         font-size:12px;
