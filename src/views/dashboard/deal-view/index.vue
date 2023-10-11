@@ -9,7 +9,7 @@
           <div class="title">{{ item.description }}</div>
           <div class="features">{{item.categoryName}} | {{item.subCategoryName }}</div>
           <div class="price">￥{{ item.price }}</div>
-          <img :src="item.userAvatar" alt=""><span>{{item.usrname}}</span>
+          <img :src="item.userAvatar" alt=""><span>{{item.username}}</span>
         </div>
 
       </div>
@@ -78,7 +78,7 @@ onMounted(lazyLoadDealCardList);
   .deal-card {
     display: grid;;
     grid-template-rows: 3fr 2fr;
-    height: 240px;
+    height: 200px;
     width: 45%;
     border: 1px solid rgb(213, 213,213,0.3) ;
     border-radius:8px;
