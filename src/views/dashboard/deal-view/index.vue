@@ -11,7 +11,7 @@
           <div class="price">￥{{ item.price }}</div>
           <div>
             <img :src="item.userAvatar" alt="" style="vertical-align:middle;">
-            <span class="userName" style="width: 30px;text-align: center">{{item.userName}}</span>
+            &nbsp;&nbsp;&nbsp;<span class="userName" style="width: 30px;text-align: center">{{item.userName}}</span>
           </div>
 
         </div>
@@ -57,7 +57,7 @@ onMounted(lazyLoadDealCardList);
 <style scoped lang="less">
 .userName{
   width: 50px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .card-message img{
   width: 18px;
