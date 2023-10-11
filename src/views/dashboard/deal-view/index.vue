@@ -10,8 +10,8 @@
           <div class="features">{{item.categoryName}} | {{item.subCategoryName }}</div>
           <div class="price">￥{{ item.price }}</div>
           <div>
-            <span class="userName" style="width: 30px;float: right;">{{item.userName}}</span>
             <img :src="item.userAvatar" alt="" style="vertical-align:middle;">
+            <span class="userName" style="width: 30px;text-align: center">{{item.userName}}</span>
           </div>
 
         </div>
