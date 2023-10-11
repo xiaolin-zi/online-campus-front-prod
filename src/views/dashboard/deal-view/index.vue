@@ -52,6 +52,9 @@ onMounted(lazyLoadDealCardList);
 <style scoped lang="less">
 .userAvatar{
   float: right;
+
+}
+.userAvatar img{
   width: 30px;
   height: 30px;
 }
