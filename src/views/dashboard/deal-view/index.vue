@@ -8,8 +8,11 @@
         <div class="card-message">
           <div class="title">{{ item.description }}</div>
           <div class="features">{{item.categoryName}} | {{item.subCategoryName }}</div>
-          <div class="price">￥{{ item.price }}</div>
-          <div class="userAvatar"><img :src="item.userAvatar" alt=""></div>
+          <div>
+            <span class="price">￥{{ item.price }}</span>
+            <span class="userAvatar"><img :src="item.userAvatar" alt=""></span>
+          </div>
+
         </div>
       </div>
     </div>
@@ -51,7 +54,7 @@ onMounted(lazyLoadDealCardList);
 
 <style scoped lang="less">
 .userAvatar{
-  float: right;
+
 
 }
 .userAvatar img{
